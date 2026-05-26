@@ -1,1 +1,874 @@
-Hello World
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kenzie Nabeel — Portfolio</title>
+<meta name="description" content="Kenzie Nabeel Rivanda(gengi) — Cyber Security undergraduate at BINUS University. Reverse Engineering, IoT, Red Teaming." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0b0d'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' fill='%23ff5a1f' font-family='monospace' font-size='18' font-weight='700'%3Eg%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #0a0b0d;
+    --bg-2: #111317;
+    --fg: #ece7d8;
+    --fg-dim: #a39e90;
+    --muted: #6a6760;
+    --line: #1f2126;
+    --line-2: #2a2c33;
+    --accent: #ff5a1f;
+    --accent-dim: #cf4715;
+    --ok: #7ce3a5;
+    --warn: #ffcb6b;
+
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --serif: "Instrument Serif", "Iowan Old Style", "Apple Garamond", Georgia, serif;
+
+    --max: 1100px;
+  }
+
+  *{ box-sizing: border-box; }
+  html,body{ margin:0; padding:0; }
+  html{ scroll-behavior: smooth; }
+  body{
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    background-image:
+      radial-gradient(1200px 600px at 80% -10%, rgba(255,90,31,0.06), transparent 60%),
+      radial-gradient(900px 500px at -10% 30%, rgba(124,227,165,0.03), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  /* subtle scanline / grain via repeating gradients */
+  body::before{
+    content:"";
+    position: fixed; inset:0;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.012) 0px,
+      rgba(255,255,255,0.012) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    z-index: 1;
+    mix-blend-mode: overlay;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+  ::selection{ background: var(--accent); color: #0a0b0d; }
+
+  /* ------- topbar (from v3 — simplified) ------- */
+  .topbar{
+    position: sticky; top: 0; z-index: 10;
+    backdrop-filter: blur(10px);
+    background: rgba(10,11,13,0.78);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner{
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    color: var(--fg-dim);
+  }
+  .topbar .brand{ color: var(--fg); }
+  .topbar .brand b{ color: var(--accent); font-weight: 500; }
+  .topbar nav{ display: flex; gap: 22px; }
+  .topbar nav a{ color: var(--fg-dim); transition: color .15s ease; }
+  .topbar nav a:hover{ color: var(--fg); }
+  @media (max-width: 720px){ .topbar nav{ display: none; } }
+
+  /* ------- layout ------- */
+  main{ max-width: var(--max); margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
+  section{ padding: 72px 0; border-top: 1px solid var(--line); }
+  section:first-of-type{ border-top: none; }
+
+  .section-head{
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 28px;
+    align-items: baseline;
+    margin-bottom: 36px;
+  }
+  .section-head .num{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+  }
+  .section-head h2{
+    margin: 0;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(22px, 3vw, 30px);
+    letter-spacing: -0.01em;
+  }
+  .section-head h2 em{
+    font-family: var(--serif);
+    font-style: italic;
+    color: var(--fg-dim);
+    font-weight: 400;
+  }
+  @media (max-width: 640px){
+    .section-head{ grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  /* ------- hero ------- */
+  .hero{
+    padding: 80px 0 48px;
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 32px;
+  }
+  .hero .col-left{
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  /* ------- avatar / profile picture ------- */
+  .avatar{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: var(--bg-2);
+    border: 1px solid var(--line-2);
+    overflow: hidden;
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    /* subtle inner glow */
+    box-shadow: inset 0 0 0 1px rgba(255,90,31,0.08),
+                0 0 0 6px rgba(255,90,31,0.04);
+    transition: box-shadow .25s ease;
+  }
+  .avatar:hover{
+    box-shadow: inset 0 0 0 1px rgba(255,90,31,0.15),
+                0 0 0 8px rgba(255,90,31,0.08);
+  }
+  .avatar img{
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .avatar .initials{
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 52px;
+    color: var(--accent);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  /* corner registration marks for "dossier" feel */
+  .avatar::before, .avatar::after{
+    content: "";
+    position: absolute;
+    width: 10px; height: 10px;
+    border: 1px solid var(--accent);
+    opacity: 0.5;
+  }
+  .avatar::before{ top: -4px; left: -4px; border-right: none; border-bottom: none; }
+  .avatar::after{ bottom: -4px; right: -4px; border-left: none; border-top: none; }
+
+  .hero .meta{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--fg-dim);
+    line-height: 1.9;
+  }
+  .hero .meta span{ color: var(--accent); }
+  .hero h1{
+    margin: 0 0 12px;
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(44px, 7.5vw, 92px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 .handle{
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.28em;
+    vertical-align: middle;
+    color: var(--accent);
+    padding: 4px 10px;
+    border: 1px solid var(--accent);
+    border-radius: 999px;
+    margin-left: 14px;
+    transform: translateY(-12px);
+    letter-spacing: 0.05em;
+  }
+  .hero .tagline{
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 18px 0 26px;
+  }
+  .hero p.intro{
+    max-width: 62ch;
+    font-size: 17px;
+    color: var(--fg);
+    line-height: 1.6;
+  }
+  .hero .links{
+    margin-top: 28px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .btn{
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    border: 1px solid var(--line-2);
+    border-radius: 4px;
+    color: var(--fg);
+    background: var(--bg-2);
+    transition: all .15s ease;
+  }
+  .btn:hover{
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+  }
+  .btn .arrow{ transition: transform .15s ease; }
+  .btn:hover .arrow{ transform: translate(2px,-2px); }
+
+  @media (max-width: 640px){
+    .hero{ grid-template-columns: 1fr; gap: 24px; padding-top: 48px; }
+    .hero .col-left{ flex-direction: row; align-items: center; gap: 20px; }
+    .avatar{ width: 92px; height: 92px; }
+    .avatar .initials{ font-size: 38px; }
+    .hero h1 .handle{ display: inline-block; margin-left: 8px; transform: translateY(-6px); font-size: 12px; }
+  }
+
+  /* ------- skills ------- */
+  .skills-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  .skill-cat{
+    background: var(--bg);
+    padding: 22px;
+    transition: background .2s ease;
+  }
+  .skill-cat:hover{ background: var(--bg-2); }
+  .skill-cat h3{
+    margin: 0 0 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .skill-cat h3::before{
+    content: "▸";
+    color: var(--accent);
+  }
+  .skill-cat ul{
+    margin: 0; padding: 0; list-style: none;
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .skill-cat li{
+    font-size: 13px;
+    color: var(--fg);
+    padding: 4px 10px;
+    background: var(--bg-2);
+    border: 1px solid var(--line-2);
+    border-radius: 3px;
+  }
+
+  /* ------- entries (experience / education / orgs / courses) ------- */
+  .entry{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 28px;
+    padding: 22px 0;
+    border-top: 1px dashed var(--line);
+  }
+  .entry:first-child{ border-top: none; padding-top: 0; }
+  .entry .when{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--fg-dim);
+    letter-spacing: 0.04em;
+  }
+  .entry h3{
+    margin: 0 0 4px;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+  .entry h3 a:hover{ color: var(--accent); }
+  .entry .role{
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    margin-bottom: 10px;
+    letter-spacing: 0.04em;
+  }
+  .entry .where{ color: var(--fg-dim); font-size: 14px; margin-bottom: 8px; }
+  .entry p{ margin: 6px 0 0; color: var(--fg); font-size: 15px; }
+  .entry ul.bullets{
+    margin: 8px 0 0; padding-left: 0; list-style: none;
+  }
+  .entry ul.bullets li{
+    position: relative;
+    padding-left: 18px;
+    margin: 4px 0;
+    font-size: 15px;
+    color: var(--fg);
+  }
+  .entry ul.bullets li::before{
+    content: "—";
+    position: absolute; left: 0;
+    color: var(--accent);
+  }
+  @media (max-width: 640px){
+    .entry{ grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  /* ------- projects ------- */
+  .projects-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .project{
+    border: 1px solid var(--line);
+    background: var(--bg-2);
+    padding: 22px;
+    border-radius: 4px;
+    transition: all .2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .project::after{
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(140deg, transparent 60%, rgba(255,90,31,0.08));
+    opacity: 0;
+    transition: opacity .25s ease;
+    pointer-events: none;
+  }
+  .project:hover{
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+  .project:hover::after{ opacity: 1; }
+  .project .head{
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;
+    margin-bottom: 8px;
+  }
+  .project h3{
+    margin: 0;
+    font-size: 17px;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+  .project h3 a{ display: inline-flex; align-items: center; gap: 6px; }
+  .project h3 a:hover{ color: var(--accent); }
+  .project .lang{
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+    padding: 3px 7px;
+    border: 1px solid var(--line-2);
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .project p{ margin: 6px 0 0; font-size: 14px; color: var(--fg-dim); }
+  .project .tags{
+    margin-top: 12px;
+    display: flex; flex-wrap: wrap; gap: 6px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .project .tags span::before{ content: "#"; color: var(--accent); }
+
+  /* ------- awards ------- */
+  .award-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px;
+  }
+  .award{
+    border: 1px solid var(--line);
+    padding: 16px 18px;
+    border-radius: 4px;
+    background: var(--bg-2);
+    transition: border-color .15s ease;
+  }
+  .award:hover{ border-color: var(--accent); }
+  .award h4{
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .award .meta{
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--fg-dim);
+    letter-spacing: 0.04em;
+  }
+
+  .cert-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 10px;
+  }
+  .cert{
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--bg-2);
+    font-size: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .cert::before{
+    content: "✓";
+    color: var(--accent);
+    font-family: var(--mono);
+    font-weight: 700;
+  }
+
+  /* ------- footer ------- */
+  footer{
+    margin-top: 40px;
+    padding: 28px 0 40px;
+    border-top: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--fg-dim);
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    flex-wrap: wrap;
+  }
+  footer .end{ color: var(--accent); }
+
+  /* reveal animation */
+  .reveal{
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .reveal.in{ opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+    .reveal{ opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ TOPBAR (simple, no STATUS dot) ============ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">kenzie<b>.</b>nabeel</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+    </nav>
+  </div>
+</div>
+
+<main>
+
+  <!-- ============ HERO / ABOUT ============ -->
+  <header class="hero reveal" id="about">
+    <div class="col-left">
+      <!--
+        PROFILE PIC:
+        To use your own photo, replace the <span class="initials">KN</span>
+        line below with an <img> tag, like this:
+            <img src="profile.jpg" alt="Kenzie Nabeel" />
+        Drop your photo as `profile.jpg` next to this index.html file.
+      -->
+      <div class="avatar" aria-label="Profile picture">
+        <span class="initials"></span>
+        <img src="images/pfp.png" alt="Kenzie Nabeel" />
+      </div>
+
+      <div class="meta">
+        <div><span>LOC</span> &nbsp;Jakarta, ID</div>
+        <div><span>EDU</span> &nbsp;BINUS Univ.</div>
+        <div><span>ROLE</span>&nbsp;Cyber Sec.</div>
+        <div><span>YEAR</span>&nbsp;2026</div>
+      </div>
+    </div>
+
+    <div>
+      <h1>Kenzie Nabeel Rivanda</h1>
+      <div class="tagline">Reverse Engineering · IoT · Red Teaming</div>
+      <p class="intro">
+        Active Cyber Security undergraduate at BINUS University. I spend most of
+        my time pulling things apart to figure out how they really work —
+        binaries, embedded devices, and the soft underbelly of trust
+        assumptions in modern systems. Passionate about reverse engineering,
+        IoT engineering & security, and red team tradecraft.
+      </p>
+      <div class="links">
+        <a class="btn" href="https://github.com/g3ngi" target="_blank" rel="noopener">
+          GitHub <span class="arrow">↗</span>
+        </a>
+        <a class="btn" href="https://www.linkedin.com/in/kenzie-nabeel/" target="_blank" rel="noopener">
+          LinkedIn <span class="arrow">↗</span>
+        </a>
+        <a class="btn" href="mailto:your.email@example.com">
+          Contact <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ SKILLS ============ -->
+  <section id="skills" class="reveal">
+    <div class="section-head">
+      <div class="num">§ 01 / SKILLS</div>
+      <!-- <h2>Tools of the <em>trade</em></h2> -->
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-cat">
+        <h3>Languages</h3>
+        <ul>
+          <li>Python</li><li>Java</li><li>Swift</li>
+          <li>C / C++</li><li>JavaScript</li><li>Bash</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3>Reverse Engineering</h3>
+        <ul>
+          <li>Ghidra</li><li>IDA Pro</li><li>x64dbg</li>
+          <li>radare2</li><li>GDB</li><li>Frida</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3>Red Team / Pentesting</h3>
+        <ul>
+          <li>Burp Suite</li><li>Metasploit</li><li>Nmap</li>
+          <li>Cobalt Strike</li><li>SQLMap</li><li>Kali Linux</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3>IoT / Hardware</h3>
+        <ul>
+          <li>ESP32 / Arduino</li>
+          <li>UART / JTAG</li>
+          <li>Firmware Extraction</li>
+          <li>PlatformIO</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3>Web &amp; App Sec</h3>
+        <ul>
+          <li>OWASP Top 10</li><li>JADX</li><li>MobSF</li>
+          <li>Postman</li><li>Wireshark</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3>Dev &amp; Infra</h3>
+        <ul>
+          <li>Git / GitHub</li>
+          <li>Docker</li>
+          <li>Linux</li>
+          <li>CI/CD</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3>AI / ML</h3>
+        <ul>
+          <li>PyTorch</li><li>scikit-learn</li><li>TensorFlow</li>
+          <li>Hugging Face</li>
+        </ul>
+      </div>
+      <div class="skill-cat">
+        <h3>Languages (spoken)</h3>
+        <ul>
+          <li>Indonesian (Native)</li><li>English (Professional)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EXPERIENCE ============ -->
+  <section id="experience" class="reveal">
+    <div class="section-head">
+      <div class="num">§ 02 / EXPERIENCE</div>
+      <!-- <h2>Where I've <em>operated</em></h2> -->
+    </div>
+
+    <!-- TODO: Replace with your actual experience from LinkedIn -->
+    <div class="entry">
+      <div class="when">FEB 2025 — FEB 2026<br/>Jakarta, ID</div>
+      <div>
+        <h3>Penetration Tester Intern</h3>
+        <div class="role">ITSEC Asia</div>
+        <ul class="bullets">
+          <li>Delivering offensive security services throughout penetration testing in web
+applications, mobile applications (Android app, EKYC feature) & API.</li>
+          <li>Creating a technical report for the vulnerability finding explanation and recommended remediation from specific technology stack that complies to theinformation security standard frameworks.</li>
+          <li>Assisting the bfuscated apps, understanding API encryption and application logic flow, finding keyclient in providing various security solutions.</li>
+          <li>Assisting in reverse engineering mobile apps (obfuscated apps, understanding API encryption and application logic flow, finding keys).</li>
+          <li>Assisting in OT Red Teaming scenarios, malware & payload development in OT environment.</li>
+        </ul>
+      </div>
+    </div>
+
+  <!-- ============ PROJECTS ============ -->
+  <section id="projects" class="reveal">
+    <div class="section-head">
+      <div class="num">§ 03 / PROJECTS</div>
+      <!-- <h2>Selected <em>work</em></h2> -->
+    </div>
+
+    <div class="projects-grid">
+
+      <article class="project">
+        <div class="head">
+          <h3><a href="https://github.com/g3ngi/Anti-RE" target="_blank" rel="noopener">Anti-RE <span class="arrow">↗</span></a></h3>
+          <span class="lang">Python</span>
+        </div>
+        <p>A collection of anti reverse-engineering techniques — anti-debug, anti-VM, and runtime integrity checks intended for research and red team payload hardening.</p>
+        <div class="tags"><span>reverse-engineering</span><span>evasion</span></div>
+      </article>
+
+      <article class="project">
+        <div class="head">
+          <h3><a href="https://github.com/g3ngi/NoTrust_Agent" target="_blank" rel="noopener">NoTrust Agent <span class="arrow">↗</span></a></h3>
+          <span class="lang">Swift</span>
+        </div>
+        <p>Zero-trust security agent implementation targeting the Apple macOS environment. Continuously verifies device posture and enforces conditional access.</p>
+        <div class="tags"><span>zero-trust</span><span>macos</span><span>swift</span></div>
+      </article>
+
+      <article class="project">
+        <div class="head">
+          <h3><a href="https://github.com/g3ngi/NoTrust_Gadget" target="_blank" rel="noopener">NoTrust Gadget <span class="arrow">↗</span></a></h3>
+          <span class="lang">Swift</span>
+        </div>
+        <p>iOS counterpart to NoTrust Agent — zero-trust posture checks and policy enforcement on Apple mobile devices.</p>
+        <div class="tags"><span>zero-trust</span><span>ios</span></div>
+      </article>
+
+      <article class="project">
+        <div class="head">
+          <h3><a href="https://github.com/g3ngi/AI-Hoshino-Bot" target="_blank" rel="noopener">AI Hoshino Bot <span class="arrow">↗</span></a></h3>
+          <span class="lang">Python</span>
+        </div>
+        <p>Discord bot that uses a deep learning model to flag malicious URLs posted in chat in real time — built to protect community servers from phishing.</p>
+        <div class="tags"><span>ml-security</span><span>phishing</span><span>discord</span></div>
+      </article>
+
+      <article class="project">
+        <div class="head">
+          <h3><a href="https://github.com/g3ngi/ctf-challs" target="_blank" rel="noopener">CTF Challenges <span class="arrow">↗</span></a></h3>
+          <span class="lang">Java</span>
+        </div>
+        <p>Author-side repository for CTF challenges I've designed across reverse engineering, web exploitation, and binary categories.</p>
+        <div class="tags"><span>ctf</span><span>author</span></div>
+      </article>
+
+      <article class="project">
+        <div class="head">
+          <h3><a href="https://github.com/g3ngi" target="_blank" rel="noopener">See all 31 repos <span class="arrow">↗</span></a></h3>
+          <span class="lang">github</span>
+        </div>
+        <p>More tooling, write-ups, and research lives on my GitHub — including PETIRsec contributions.</p>
+        <div class="tags"><span>more</span></div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ============ EDUCATION ============ -->
+  <section id="education" class="reveal">
+    <div class="section-head">
+      <div class="num">§ 04 / EDUCATION</div>
+      <!-- <h2>Formal <em>training</em></h2> -->
+    </div>
+
+    <div class="entry">
+      <div class="when">2022 — 2026<br/>Jakarta, ID</div>
+      <div>
+        <h3>Bina Nusantara University (BINUS)</h3>
+        <div class="role">Undergraduate in Cyber Security, Computer Science</div>
+        <ul class="bullets">
+          <li>Relevant coursework: Reverse Engineering, Binary Exploitation, Network &amp; Mobile Pentesting, Secure Programming, Software Security.</li>
+          <li>[Add GPA, leadership roles, or notable coursework here.]</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="when">2025 — 2027<br/>Jakarta, ID</div>
+      <div>
+        <h3>Bina Nusantara University (BINUS)</h3>
+        <div class="role">Master of Computer Science (Fast Track)</div>
+        <ul class="bullets">
+          <li>Relevant coursework: Reverse Engineering, Binary Exploitation, Network &amp; Mobile Pentesting, Secure Programming, Software Security.</li>
+          <li>[Add GPA, leadership roles, or notable coursework here.]</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ============ ORGANIZATIONS ============ -->
+  <section id="organizations" class="reveal">
+    <div class="section-head">
+      <div class="num">§ 05 / ORGANIZATIONS</div>
+      <!-- <h2>Crews &amp; <em>collectives</em></h2> -->
+    </div>
+
+    <div class="entry">
+      <div class="when">2023 — Present</div>
+      <div>
+        <h3><a href="https://petirsec.org/" target="_blank" rel="noopener">PETIR Cyber Security ↗</a></h3>
+        <div class="role">Team Member </div>
+        <ul class="bullets">
+          <li>Represented BINUS University in national and international CTF competitions.</li>
+          <li>Specialized in Reverse Engineering and Hardware categories.</li>
+          <li>Developed 10+ CTF Challenges accross 3+ competitions (Reverse engineering)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="when">2022 — 2025</div>
+      <div>
+        <h3><a href="" target="_blank" rel="noopener">UKM Band Binus ↗</a></h3>
+        <div class="role">President of Kemanggisan Region </div>
+        <ul class="bullets">
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AWARDS ============ -->
+  <section id="awards" class="reveal">
+    <div class="section-head">
+      <div class="num">§ 06 / AWARDS</div>
+      <!-- <h2>Competitions &amp; <em>recognition</em></h2> -->
+    </div>
+
+    <!-- TODO: Replace placeholders with your actual CTF / hackathon placings -->
+    <div class="award-list">
+      <div class="award">
+        <h4>1st Place Hack The City CTF</h4>
+        <div class="meta">SATSIBER TNI · SEP 2025</div>
+      </div>
+      <div class="award">
+        <h4>1st Place Joints CTF</h4>
+        <div class="meta">Universitas Gadjah Mada · MAY 2023</div>
+      </div>
+      <div class="award">
+        <h4>2nd Place Gemastik XVIII - Keamanan Siber</h4>
+        <div class="meta">Ditmawa · OCT 2025</div>
+      </div>
+      <div class="award">
+        <h4>3rd Place Wreck-IT CTF</h4>
+        <div class="meta">Politenik Sandi Siber Negara · MAY 2023</div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ============ CERTIFICATES ============ -->
+  <section id="certificates" class="reveal">
+    <div class="section-head">
+      <div class="num">§ 07 / CERTIFICATES</div>
+      <!-- <h2>Credentials <em>earned</em></h2> -->
+    </div>
+
+    <!-- TODO: Replace with your actual certifications -->
+    <div class="cert-list">
+      <div class="cert">Certified AppSec Practitioner (CAP)</div>
+    </div>
+    <div class="cert-list">
+      <div class="cert">AMD ROCm Star Application Developer Certificate </div>
+    </div>
+  </section>
+
+  <!-- ============ COURSES ============ -->
+  <section id="courses" class="reveal">
+    <div class="section-head">
+      <div class="num">§ 08 / COURSES</div>
+    </div>
+
+    <!-- TODO: Add courses / bootcamps / scholarships you've completed -->
+    <div class="entry">
+      <div class="when">Mar 2023 - Jul 2023</div>
+      <div>
+        <h3>Javascript Backend Scholarship</h3>
+        <div class="role">DBS Foundation Coding Camp</div>
+        <p>Fundamentals of Javascript usage, Algorithms, Data Structure and Node.js</p>
+      </div>
+    </div>
+
+    <div class="entry">
+      <div class="when">MMM YYYY — MMM YYYY</div>
+      <div>
+        <h3>NVIDIA Deep Learning Workshop</h3>
+        <div class="role">NVIDIA Deep Learning Institute</div>
+        <p>Fundamentals of neural networks and CUDA-based GPU acceleration for deep learning workloads.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>© <span id="year">2026</span> All rights reserved.</div>
+    <div class="end">// END_OF_FILE</div>
+  </footer>
+
+</main>
+
+<script>
+  // year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // reveal on scroll
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
