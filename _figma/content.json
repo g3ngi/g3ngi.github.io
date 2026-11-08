@@ -1,0 +1,382 @@
+{
+  "landing": {
+    "name": "Kenzie Nabeel Rivanda",
+    "slogan": "I take systems apart to find where trust breaks , then write it up so someone else can use it.",
+    "role": "Security engineer",
+    "location": "Jakarta",
+    "school": "BINUS 2026"
+  },
+  "work": [
+    {
+      "when": "Feb 2025 — Feb 2026",
+      "place": "Jakarta, ID",
+      "title": "Penetration Tester Intern",
+      "org": "ITSEC Asia",
+      "org_url": "https://itsec.asia/",
+      "points": [
+        "Web, mobile and API pentesting across finance and fintech engagements.",
+        "Reverse engineered obfuscated Android apps — API encryption, logic flow, key recovery.",
+        "OT red teaming: malware and payload development in OT environments."
+      ]
+    },
+    {
+      "when": "2023 — present",
+      "place": "BINUS",
+      "title": "CTF Player & Challenge Author",
+      "org": "PETIR Cyber Security",
+      "org_url": "https://petirsec.org/",
+      "points": [
+        "Reverse engineering and hardware categories, national and international.",
+        "Authored 10+ reverse engineering challenges across 3+ competitions."
+      ]
+    }
+  ],
+  "awards": [
+    {
+      "rank": "1st",
+      "name": "Hack The City CTF",
+      "org": "SATSIBER TNI",
+      "when": "Sep 2025"
+    },
+    {
+      "rank": "1st",
+      "name": "Joints CTF",
+      "org": "Universitas Gadjah Mada",
+      "when": "May 2023"
+    },
+    {
+      "rank": "2nd",
+      "name": "Gemastik XVIII — Keamanan Siber",
+      "org": "Ditmawa",
+      "when": "Oct 2025"
+    },
+    {
+      "rank": "3rd",
+      "name": "Wreck-IT CTF",
+      "org": "Politeknik Sandi Siber Negara",
+      "when": "May 2023"
+    },
+    {
+      "rank": "10+",
+      "name": "CTF challenges authored",
+      "org": "Reverse engineering category",
+      "when": "Ongoing"
+    }
+  ],
+  "cases": [
+    {
+      "id": "001",
+      "stack": "Python · Windows x86-64",
+      "status": "shipped",
+      "name": "Anti-RE",
+      "summary": "A catalogue of anti reverse-engineering techniques — anti-debug, anti-VM and runtime integrity checks — built to see evasive payloads from both sides of the debugger.",
+      "fields": [
+        {
+          "label": "Target",
+          "value": "Windows PE binaries, x86-64. A reference implementation rather than a single payload."
+        },
+        {
+          "label": "Vector",
+          "value": [
+            "Anti-debug via PEB.BeingDebugged, NtQueryInformationProcess, hardware breakpoint registers.",
+            "Anti-VM through CPUID hypervisor bits, registry artefacts and timing skew.",
+            "Runtime integrity: checksumming its own .text section to catch patches."
+          ]
+        },
+        {
+          "label": "Why",
+          "value": "Each check abuses an assumption the analyst makes — that the debugger is invisible, that a VM looks like bare metal, that the mapped image equals the file on disk. Break one and the payload branches to a decoy path."
+        },
+        {
+          "label": "Measured",
+          "value": "See matrix below."
+        },
+        {
+          "label": "Outcome",
+          "value": "Hardened red team payloads against the same tooling used to analyse them."
+        }
+      ],
+      "links": [
+        {
+          "label": "Source  (opens in a new tab)",
+          "url": "https://github.com/g3ngi/Anti-RE"
+        }
+      ],
+      "tags": [
+        "reverse-engineering",
+        "evasion",
+        "windows"
+      ],
+      "matrix": {
+        "columns": [
+          "Technique",
+          "x64dbg",
+          "Frida",
+          "Note"
+        ],
+        "rows": [
+          [
+            "PEB.BeingDebugged",
+            "✕ caught",
+            "✕",
+            "trivial to bypass"
+          ],
+          [
+            "NtQueryInformationProcess",
+            "✕ caught",
+            "~",
+            "needs hooking"
+          ],
+          [
+            "Hardware breakpoints",
+            "✓ holds",
+            "~",
+            "most reliable"
+          ],
+          [
+            "Text-section checksum",
+            "✓ holds",
+            "✓",
+            "catches patches"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "002",
+      "stack": "Swift · macOS",
+      "status": "in progress",
+      "name": "NoTrust Agent",
+      "summary": "Zero-trust posture agent for macOS. Continuous attestation and conditional access, built to test the claim that a managed endpoint is trustworthy by default.",
+      "fields": [
+        {
+          "label": "Target",
+          "value": "macOS endpoints. The companion gadget targets iOS; both assume the device may already be compromised."
+        },
+        {
+          "label": "Model",
+          "value": [
+            "Post-compromise persistence: signing state, launch agents and daemons, TCC grants.",
+            "Integrity drift: SIP status, unsigned kernel extensions, modified system binaries.",
+            "Trust boundary failure: a device that passes one check once, then drifts."
+          ]
+        },
+        {
+          "label": "Approach",
+          "value": "Continuous evidence over point-in-time scoring. Signals are re-collected on an interval and aggregated into a verdict that gates access — not a single enrolment check."
+        },
+        {
+          "label": "Open",
+          "value": "An agent cannot be trusted to police its own host — a compromised one can lie. The fix is remote attestation, which is the part still unsolved."
+        }
+      ],
+      "links": [
+        {
+          "label": "Agent  (opens in a new tab)",
+          "url": "https://github.com/g3ngi/NoTrust_Agent"
+        },
+        {
+          "label": "Gadget  (opens in a new tab)",
+          "url": "https://github.com/g3ngi/NoTrust_Gadget"
+        }
+      ],
+      "tags": [
+        "zero-trust",
+        "macos",
+        "swift"
+      ]
+    }
+  ],
+  "repos": [
+    {
+      "name": "AI-Hoshino-Bot",
+      "lang": "Python",
+      "note": "Flags malicious URLs in Discord chat.",
+      "url": "https://github.com/g3ngi/AI-Hoshino-Bot"
+    },
+    {
+      "name": "NoTrust_Gadget",
+      "lang": "Swift",
+      "note": "iOS posture checks.",
+      "url": "https://github.com/g3ngi/NoTrust_Gadget"
+    },
+    {
+      "name": "ctf-challs",
+      "lang": "Java",
+      "note": "Authored CTF challenges, RE and binary.",
+      "url": "https://github.com/g3ngi/ctf-challs"
+    },
+    {
+      "name": "EDIV-LCA",
+      "lang": "Research",
+      "note": "Master's thesis: life-cycle assessment.",
+      "url": "https://github.com/g3ngi/EDIV-LCA"
+    },
+    {
+      "name": "wazuh_contribute",
+      "lang": "★ 1",
+      "note": "Contributions to Wazuh.",
+      "url": "https://github.com/g3ngi/wazuh_contribute"
+    },
+    {
+      "name": "all 32 repositories",
+      "lang": "12 langs",
+      "note": "Go, Rust, Solidity, Jupyter, and the rest.",
+      "url": "https://github.com/g3ngi?tab=repositories"
+    }
+  ],
+  "record": [
+    {
+      "when": "Jul 2022 — Aug 2026",
+      "place": "Jakarta",
+      "title": "BSc, Cyber Security",
+      "org": "Bina Nusantara University",
+      "points": [
+        "Reverse Engineering · Binary Exploitation · Mobile Pentesting · Software Security."
+      ]
+    },
+    {
+      "when": "2025 — 2027",
+      "place": "Jakarta",
+      "title": "MSc, Computer Science",
+      "org": "Bina Nusantara University · fast track",
+      "points": [
+        "Thesis project: EDIV-LCA — life-cycle assessment tooling."
+      ]
+    },
+    {
+      "when": "2023 — present",
+      "place": "BINUS",
+      "title": "PETIR Cyber Security",
+      "org": "Team member",
+      "points": [
+        "CTF team. Reverse engineering and hardware."
+      ]
+    },
+    {
+      "when": "2022 — 2025",
+      "place": "Jakarta",
+      "title": "UKM Band BINUS",
+      "org": "President, Kemanggisan region",
+      "points": [
+        "Led the Kemanggisan chapter."
+      ]
+    }
+  ],
+  "toolbox": [
+    {
+      "group": "Languages",
+      "items": [
+        "Python",
+        "Java",
+        "Swift",
+        "C / C++",
+        "JavaScript",
+        "Bash",
+        "Go",
+        "Rust"
+      ]
+    },
+    {
+      "group": "Reverse eng.",
+      "items": [
+        "Ghidra",
+        "IDA Pro",
+        "x64dbg",
+        "radare2",
+        "GDB",
+        "Frida"
+      ]
+    },
+    {
+      "group": "Red team",
+      "items": [
+        "Burp Suite",
+        "Metasploit",
+        "Nmap",
+        "Cobalt Strike",
+        "SQLMap",
+        "Kali"
+      ]
+    },
+    {
+      "group": "IoT / hardware",
+      "items": [
+        "ESP32 / Arduino",
+        "UART / JTAG",
+        "firmware extraction",
+        "PlatformIO"
+      ]
+    },
+    {
+      "group": "Web & app",
+      "items": [
+        "OWASP Top 10",
+        "JADX",
+        "MobSF",
+        "Postman",
+        "Wireshark"
+      ]
+    },
+    {
+      "group": "Dev & infra",
+      "items": [
+        "Git / GitHub",
+        "Docker",
+        "Linux",
+        "CI / CD",
+        "Node-RED",
+        "MQTT"
+      ]
+    },
+    {
+      "group": "AI / ML",
+      "items": [
+        "PyTorch",
+        "scikit-learn",
+        "TensorFlow",
+        "Hugging Face",
+        "YOLO"
+      ]
+    },
+    {
+      "group": "Spoken",
+      "items": [
+        "Indonesian (native)",
+        "English (professional)"
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Certified AppSec Practitioner",
+      "issuer": "The SecOps Group"
+    },
+    {
+      "name": "ROCm Star Application Developer",
+      "issuer": "AMD"
+    },
+    {
+      "name": "JavaScript Backend Scholarship",
+      "issuer": "DBS Foundation · 2023"
+    },
+    {
+      "name": "Deep Learning Workshop",
+      "issuer": "NVIDIA DLI"
+    }
+  ],
+  "testpoint": {
+    "id": "TP-01",
+    "prompt": "Find any input this accepts.",
+    "code": "// true for one shape of input function check(s) { let h = 0x2f ; for ( const c of s) h ^= c.charCodeAt( 0 ); return h === 0 && s.length === 4 ; }",
+    "solution": "The accumulator starts at 0x2f and XORs every byte, so you need b1 ^ b2 ^ b3 ^ b4 === 0x2f . Pick any three bytes and the fourth is forced: for abc it is 0x2f ^ 0x61 ^ 0x62 ^ 0x63 = 0x4f — the character O , so abcO passes."
+  },
+  "contact": {
+    "heading": "Let's talk .",
+    "sub": "Email is fastest.",
+    "email": "kenzienabeel@gmail.com",
+    "github": "https://github.com/g3ngi",
+    "linkedin": "https://www.linkedin.com/in/kenzie-nabeel/"
+  },
+  "slogan_clean": "I take systems apart to find where trust breaks, then write it up so someone else can use it."
+}

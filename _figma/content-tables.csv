@@ -1,0 +1,32 @@
+SECTION,COL1,COL2,COL3,COL4
+Work,Feb 2025 — Feb 2026,Penetration Tester Intern,ITSEC Asia,"Web, mobile and API pentesting across finance and fintech engagements. / Reverse engineered obfuscated Android apps — API encryption, logic flow, key recovery. / OT red teaming: malware and payload development in OT environments."
+Work,2023 — present,CTF Player & Challenge Author,PETIR Cyber Security,"Reverse engineering and hardware categories, national and international. / Authored 10+ reverse engineering challenges across 3+ competitions."
+Awards,1st,Hack The City CTF,SATSIBER TNI,Sep 2025
+Awards,1st,Joints CTF,Universitas Gadjah Mada,May 2023
+Awards,2nd,Gemastik XVIII — Keamanan Siber,Ditmawa,Oct 2025
+Awards,3rd,Wreck-IT CTF,Politeknik Sandi Siber Negara,May 2023
+Awards,10+,CTF challenges authored,Reverse engineering category,Ongoing
+Also built,Python,AI-Hoshino-Bot,Flags malicious URLs in Discord chat.,https://github.com/g3ngi/AI-Hoshino-Bot
+Also built,Swift,NoTrust_Gadget,iOS posture checks.,https://github.com/g3ngi/NoTrust_Gadget
+Also built,Java,ctf-challs,"Authored CTF challenges, RE and binary.",https://github.com/g3ngi/ctf-challs
+Also built,Research,EDIV-LCA,Master's thesis: life-cycle assessment.,https://github.com/g3ngi/EDIV-LCA
+Also built,★ 1,wazuh_contribute,Contributions to Wazuh.,https://github.com/g3ngi/wazuh_contribute
+Also built,12 langs,all 32 repositories,"Go, Rust, Solidity, Jupyter, and the rest.",https://github.com/g3ngi?tab=repositories
+Record,Jul 2022 — Aug 2026,"BSc, Cyber Security",Bina Nusantara University,Reverse Engineering · Binary Exploitation · Mobile Pentesting · Software Security.
+Record,2025 — 2027,"MSc, Computer Science",Bina Nusantara University · fast track,Thesis project: EDIV-LCA — life-cycle assessment tooling.
+Record,2023 — present,PETIR Cyber Security,Team member,CTF team. Reverse engineering and hardware.
+Record,2022 — 2025,UKM Band BINUS,"President, Kemanggisan region",Led the Kemanggisan chapter.
+Kit,Languages,Python · Java · Swift · C / C++ · JavaScript · Bash · Go · Rust,,
+Kit,Reverse eng.,Ghidra · IDA Pro · x64dbg · radare2 · GDB · Frida,,
+Kit,Red team,Burp Suite · Metasploit · Nmap · Cobalt Strike · SQLMap · Kali,,
+Kit,IoT / hardware,ESP32 / Arduino · UART / JTAG · firmware extraction · PlatformIO,,
+Kit,Web & app,OWASP Top 10 · JADX · MobSF · Postman · Wireshark,,
+Kit,Dev & infra,Git / GitHub · Docker · Linux · CI / CD · Node-RED · MQTT,,
+Kit,AI / ML,PyTorch · scikit-learn · TensorFlow · Hugging Face · YOLO,,
+Kit,Spoken,Indonesian (native) · English (professional),,
+Certifications,The SecOps Group,Certified AppSec Practitioner,,
+Certifications,AMD,ROCm Star Application Developer,,
+Certifications,DBS Foundation · 2023,JavaScript Backend Scholarship,,
+Certifications,NVIDIA DLI,Deep Learning Workshop,,
+Cases,Case 001,Anti-RE,Python · Windows x86-64,"A catalogue of anti reverse-engineering techniques — anti-debug, anti-VM and runtime integrity checks — built to see evasive payloads from both sides of the debugger."
+Cases,Case 002,NoTrust Agent,Swift · macOS,"Zero-trust posture agent for macOS. Continuous attestation and conditional access, built to test the claim that a managed endpoint is trustworthy by default."

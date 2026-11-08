@@ -3,872 +3,2679 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Kenzie Nabeel — Portfolio</title>
-<meta name="description" content="Kenzie Nabeel Rivanda(gengi) — Cyber Security undergraduate at BINUS University. Reverse Engineering, IoT, Red Teaming." />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0b0d'/%3E%3Ctext x='50%25' y='58%25' text-anchor='middle' fill='%23ff5a1f' font-family='monospace' font-size='18' font-weight='700'%3Eg%3C/text%3E%3C/svg%3E" />
+<title>Kenzie Nabeel Rivanda — Security Engineering</title>
+<meta name="description" content="Kenzie Nabeel Rivanda (g3ngi). Cyber security at BINUS University. Reverse engineering, IoT security, red team tradecraft." />
+<meta name="author" content="Kenzie Nabeel Rivanda" />
+<meta name="color-scheme" content="dark" />
+<meta name="theme-color" content="#1A1F1B" />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://g3ngi.github.io/" />
+
+<meta property="og:type" content="profile" />
+<meta property="og:title" content="Kenzie Nabeel Rivanda — Security Engineering" />
+<meta property="og:description" content="Reverse engineering, IoT security, red team tradecraft. Cyber security at BINUS University." />
+<meta property="og:url" content="https://g3ngi.github.io/" />
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231A1F1B'/%3E%3Crect x='6' y='6' width='20' height='20' fill='%23CC4C50'/%3E%3C/svg%3E" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Geist:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-  :root{
-    --bg: #0a0b0d;
-    --bg-2: #111317;
-    --fg: #ece7d8;
-    --fg-dim: #a39e90;
-    --muted: #6a6760;
-    --line: #1f2126;
-    --line-2: #2a2c33;
-    --accent: #ff5a1f;
-    --accent-dim: #cf4715;
-    --ok: #7ce3a5;
-    --warn: #ffcb6b;
 
-    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-    --sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
-    --serif: "Instrument Serif", "Iowan Old Style", "Apple Garamond", Georgia, serif;
-
-    --max: 1100px;
+/* ==========================================================================
+   LANDING — full-viewport hero. Name, pfp, slogan.
+   Built from reference_1 copy.jpg: accent display type at 31% fill, a large
+   soft photo plate, bone text, near-black ground, tracking-tight.
+   ========================================================================== */
+.landing{
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  grid-template-columns: minmax(0,1fr);
+  align-items: end;
+  padding: calc(var(--bar) + 1.25rem) var(--gutter) 1.25rem;
+  overflow: hidden;
+  z-index: 3;
+}
+@media (min-width: 860px){
+  .landing{
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    column-gap: 2rem;
+    align-items: center;
+    padding-bottom: 2rem;
   }
+}
 
-  *{ box-sizing: border-box; }
-  html,body{ margin:0; padding:0; }
-  html{ scroll-behavior: smooth; }
-  body{
-    background: var(--bg);
-    color: var(--fg);
-    font-family: var(--sans);
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    background-image:
-      radial-gradient(1200px 600px at 80% -10%, rgba(255,90,31,0.06), transparent 60%),
-      radial-gradient(900px 500px at -10% 30%, rgba(124,227,165,0.03), transparent 60%);
-    background-attachment: fixed;
-  }
+/* the name — the loudest thing on the site */
+.landing-name{
+  font-size: clamp(2.9rem, 9.4vw, 7.2rem);
+  font-weight: 600;
+  line-height: 0.84;
+  letter-spacing: -0.055em;
+  color: var(--accent);
+  text-wrap: balance;
+  margin: 0;
+}
+.landing-name span{ display: block; }
+.landing-name span:nth-child(2){ color: var(--bone); }
+.landing-name span:nth-child(3){ color: var(--bone); }
 
-  /* subtle scanline / grain via repeating gradients */
-  body::before{
-    content:"";
-    position: fixed; inset:0;
-    pointer-events: none;
-    background-image: repeating-linear-gradient(
-      0deg,
-      rgba(255,255,255,0.012) 0px,
-      rgba(255,255,255,0.012) 1px,
-      transparent 1px,
-      transparent 3px
-    );
-    z-index: 1;
-    mix-blend-mode: overlay;
-  }
+.landing-rule{
+  height: 1px;
+  background: rgba(217,94,98,0.35);
+  margin: 1.25rem 0 1rem;
+  max-width: 26rem;
+}
 
-  a{ color: inherit; text-decoration: none; }
-  ::selection{ background: var(--accent); color: #0a0b0d; }
+.landing-slogan{
+  font-size: clamp(1.05rem, 1.9vw, 1.45rem);
+  line-height: 1.4;
+  letter-spacing: -0.018em;
+  color: var(--bone);
+  max-width: 26ch;
+  text-wrap: pretty;
+}
+.landing-slogan em{
+  font-style: normal;
+  color: var(--accent);
+}
 
-  /* ------- topbar (from v3 — simplified) ------- */
-  .topbar{
-    position: sticky; top: 0; z-index: 10;
-    backdrop-filter: blur(10px);
-    background: rgba(10,11,13,0.78);
-    border-bottom: 1px solid var(--line);
-  }
-  .topbar-inner{
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: 14px 24px;
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 20px;
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.04em;
-    color: var(--fg-dim);
-  }
-  .topbar .brand{ color: var(--fg); }
-  .topbar .brand b{ color: var(--accent); font-weight: 500; }
-  .topbar nav{ display: flex; gap: 22px; }
-  .topbar nav a{ color: var(--fg-dim); transition: color .15s ease; }
-  .topbar nav a:hover{ color: var(--fg); }
-  @media (max-width: 720px){ .topbar nav{ display: none; } }
+.landing-meta{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.1rem;
+  margin-top: 1.5rem;
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.landing-meta b{ color: var(--bone); font-weight: 500; }
 
-  /* ------- layout ------- */
-  main{ max-width: var(--max); margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
-  section{ padding: 72px 0; border-top: 1px solid var(--line); }
-  section:first-of-type{ border-top: none; }
+.landing-cta{
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 0.5rem 1rem;
+  margin-top: 1.75rem;
+}
+.landing-scroll{
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-family: var(--mono); font-size: var(--t-3xs);
+  letter-spacing: 0.11em; text-transform: uppercase;
+  color: var(--ink-3);
+  transition: color .2s;
+}
+.landing-scroll:hover{ color: var(--bone); }
+.landing-scroll .chev{
+  display: inline-block;
+  animation: nudge 2.2s ease-in-out infinite;
+}
+@keyframes nudge{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(3px)} }
+@media (prefers-reduced-motion: reduce){ .landing-scroll .chev{ animation: none; } }
 
-  .section-head{
-    display: grid;
-    grid-template-columns: 110px 1fr;
-    gap: 28px;
-    align-items: baseline;
-    margin-bottom: 36px;
-  }
-  .section-head .num{
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--accent);
-    letter-spacing: 0.12em;
-  }
-  .section-head h2{
-    margin: 0;
-    font-family: var(--sans);
+/* the portrait — large, softly vignetted, not a small avatar */
+.landing-photo{
+  position: relative;
+  justify-self: center;
+  width: min(100%, 24rem);
+  aspect-ratio: 4/5;
+  margin-bottom: 1.5rem;
+  order: -1;
+}
+@media (min-width: 860px){
+  .landing-photo{ order: 0; width: 100%; max-width: 26rem; margin-bottom: 0; }
+}
+.landing-photo img{
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: 52% 28%;
+  filter: grayscale(1) contrast(1.06);
+  border-radius: 1.25rem;
+  /* soft plate edges, matching the reference's large photo region */
+  -webkit-mask-image: radial-gradient(120% 120% at 50% 40%, #000 55%, transparent 100%);
+  mask-image: radial-gradient(120% 120% at 50% 40%, #000 55%, transparent 100%);
+}
+.landing-photo::after{
+  content: "";
+  position: absolute; inset: 0;
+  border-radius: 1.25rem;
+  pointer-events: none;
+  background:
+    radial-gradient(90% 70% at 50% 12%, rgba(217,94,98,0.16), transparent 65%),
+    linear-gradient(to top, rgba(26,31,27,0.85), transparent 55%);
+}
+.landing-photo .ph-tag{
+  position: absolute;
+  left: 0.9rem; bottom: 0.85rem;
+  z-index: 2;
+  font-family: var(--mono); font-size: var(--t-3xs);
+  letter-spacing: 0.11em; text-transform: uppercase;
+  color: var(--bone);
+  opacity: 0.8;
+}
+.landing-photo .ph-tag b{ color: var(--accent); font-weight: 500; }
+
+/* grain sits under the landing content */
+.landing::before{
+  content: "";
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.35;
+  mix-blend-mode: overlay;
+}
+
+/* when there is no rail, the content column is full width */
+.layout.no-rail{ display: block; }
+.layout.no-rail .content{ padding-left: 0; }
+
+/* ==========================================================================
+   g3ngi — NEO-FUTURISM
+   Light industrial surface. Sharp corners. Mechanical grid. One signal red.
+   Everything measured in fixed units, like a control panel, not a brochure.
+
+   Vocabulary taken from the Awwwards neo-futurism corpus:
+     light greys #ededed / #f8f8f8 / #fff
+     Inter Tight, tight tracking, heavy weights
+     one saturated accent (#f12a2d)
+     fixed mechanical metrics (54px bars, 6px pads)
+     tracked-out words used as ornament
+     sharp corners, clip-path notches, CSS grid throughout
+   ========================================================================== */
+
+/* Atlas Grotesk — licensed, drop files in /fonts. Falls back to Inter Tight. */
+@font-face{ font-family:"Atlas Grotesk"; src:url("fonts/AtlasGrotesk-Light.woff2") format("woff2"); font-weight:300; font-display:swap; }
+@font-face{ font-family:"Atlas Grotesk"; src:url("fonts/AtlasGrotesk-Regular.woff2") format("woff2"); font-weight:400; font-display:swap; }
+@font-face{ font-family:"Atlas Grotesk"; src:url("fonts/AtlasGrotesk-Medium.woff2") format("woff2"); font-weight:500; font-display:swap; }
+@font-face{ font-family:"Atlas Grotesk"; src:url("fonts/AtlasGrotesk-Bold.woff2") format("woff2"); font-weight:700; font-display:swap; }
+
+:root{
+  /* ---- palette: reference_1 copy.jpg, right panel --------------------- */
+  --bone:    #D6C7A6;   /* warm bone — primary text */
+  --accent:  #D95E62;   /* dusty red — the single signal */
+  --moss:    #5A8A59;   /* forest — secondary structure */
+
+  /* ---- surface: DESATURATED green-grey. 16-18% sat, not 26% ----------
+     the reference background is #1A1F1B at 16% saturation — a neutral
+     dark with a faint green cast, not a green surface. -------------- */
+  --bg-1: #1A1F1B;   /* page */
+  --bg-2: #272E26;   /* panel head / raised */
+  --bg-3: #20261F;   /* surface / cards */
+  --bg-4: #2F3630;   /* recessed strip / code bg */
+
+  /* ---- ink ------------------------------------------------------------ */
+  --ink-1: #D6C7A6;  /* headlines — the bone */
+  --ink-2: #B3A88C;  /* body */
+  --ink-3: #8A8171;  /* labels */
+  --ink-4: #5F5849;  /* faint */
+
+  /* ---- the single signal ---------------------------------------------- */
+  --signal:    var(--accent);
+  --signal-08: rgba(217, 94, 98, 0.08);
+  --signal-16: rgba(217, 94, 98, 0.16);
+  --signal-40: rgba(217, 94, 98, 0.40);
+
+  /* ---- rules ---------------------------------------------------------- */
+  --line:   rgba(217, 94, 98, 0.22);
+  --line-2: rgba(214, 199, 166, 0.11);
+  --line-3: #454F42;
+
+  /* ---- type ----------------------------------------------------------- */
+  --sans: "Atlas Grotesk", "Inter Tight", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --t-3xs: 0.625rem;
+  --t-2xs: 0.6875rem;
+  --t-xs:  0.75rem;
+  --t-s:   0.8125rem;
+  --t-m:   0.875rem;
+  --t-b:   0.9375rem;
+  --t-l:   1.0625rem;
+  --t-xl:  1.25rem;
+  --t-2xl: clamp(1.5rem, 2.6vw, 2.1rem);
+  --t-3xl: clamp(2rem, 4.4vw, 3.4rem);
+  --t-4xl: clamp(2.8rem, 8vw, 6.2rem);
+  --t-5xl: clamp(3.4rem, 12vw, 9.5rem);
+
+  /* ---- mechanical metrics (fixed, like a control panel) --------------- */
+  --bar:  3.25rem;     /* the 54px-ish header bar */
+  --pad:  0.5rem;      /* the 6px container pad */
+  --gap:  1px;         /* grid hairlines */
+
+  --rail: 14rem;
+  --max:  66rem;
+  --gutter: 1rem;
+
+  --ease: cubic-bezier(0.2, 0.9, 0.2, 1);
+}
+
+@media (min-width: 640px){ :root{ --gutter: 1.5rem; } }
+@media (min-width: 1200px){ :root{ --gutter: 2rem; } }
+
+*, *::before, *::after{ box-sizing: border-box; }
+*{ margin: 0; padding: 0; }
+
+html{
+  -webkit-text-size-adjust: 100%;
+  background: var(--bg-1);
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--bar) + 0.5rem);
+}
+@media (prefers-reduced-motion: reduce){ html{ scroll-behavior: auto; } }
+
+body{
+  background: var(--bg-1);
+  color: var(--ink-2);
+  font-family: var(--sans);
+  font-size: var(--t-b);
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: -0.006em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  /* the mechanical substrate: grain + faint grid */
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)' opacity='0.5'/%3E%3C/svg%3E"),
+    linear-gradient(to right, rgba(214,199,166,0.030) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(214,199,166,0.030) 1px, transparent 1px);
+  background-size: 240px 240px, 96px 96px, 96px 96px;
+  background-blend-mode: soft-light, normal, normal;
+}
+
+/* --- grain overlay -------------------------------------------------------
+   Measured from reference_1 copy.jpg: monochrome fractal noise, sigma ~1.9
+   out of 255 (~0.75% brightness variation). Monochrome (R/G/B correlation
+   0.93-0.96), so it reads as film grain rather than colour speckle.
+   Fixed so it sits on the viewport, not the document. ---------------------- */
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 300px 300px;
+  mix-blend-mode: overlay;
+}
+
+img{ display: block; max-width: 100%; }
+a{ color: inherit; text-decoration: none; }
+button{ font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+ul, ol{ list-style: none; }
+
+::selection{ background: rgba(217,94,98,0.32); color: var(--bone); }
+:focus-visible{ outline: 2px solid var(--signal); outline-offset: 2px; }
+
+.sr-only{
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+.skip{
+  position: fixed; left: 0; top: 0; z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--accent); color: #1A2118;
+  font-size: var(--t-m); font-weight: 500;
+  transform: translateY(-120%);
+  transition: transform .15s;
+}
+.skip:focus{ transform: none; }
+
+/* --------------------------------------------------------------------------
+   type primitives — neo-futurist: tracked caps, tight display, mono data
+   -------------------------------------------------------------------------- */
+.caps{
+  font-size: var(--t-2xs);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.mono{
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.signal{ color: var(--signal); }
+
+.prose{ color: var(--ink-2); line-height: 1.58; text-wrap: pretty; }
+.prose strong{ color: var(--ink-1); font-weight: 500; }
+.prose a{
+  color: var(--signal);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: var(--signal-40);
+  transition: text-decoration-color .2s;
+}
+.prose a:hover{ text-decoration-color: var(--signal); }
+
+/* the tracked-out ornament — "W e l c o m e" treatment */
+.spread{
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  font-size: var(--t-2xs);
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+/* --------------------------------------------------------------------------
+   TOP BAR — the control strip
+   -------------------------------------------------------------------------- */
+.bar{
+  position: sticky; top: 0; z-index: 50;
+  height: var(--bar);
+  background: rgba(26,31,27,0.90);
+  backdrop-filter: blur(10px) saturate(1.2);
+  -webkit-backdrop-filter: blur(10px) saturate(1.2);
+  border-bottom: 1px solid var(--line);
+}
+.bar-in{
+  height: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.bar-id{
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: var(--t-m);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ink-1);
+}
+.bar-id .mark{
+  width: 0.7rem; height: 0.7rem;
+  background: var(--signal);
+  flex-shrink: 0;
+}
+.bar-nav{ display: none; }
+@media (min-width: 900px){
+  .bar-nav{ display: flex; align-items: center; gap: 1px; height: 100%; }
+  .bar-nav a{
+    display: flex; align-items: center;
+    height: 100%;
+    padding-inline: 0.8rem;
+    font-size: var(--t-2xs);
     font-weight: 500;
-    font-size: clamp(22px, 3vw, 30px);
-    letter-spacing: -0.01em;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    border-left: 1px solid var(--line-2);
+    transition: color .15s, background-color .15s;
   }
-  .section-head h2 em{
-    font-family: var(--serif);
-    font-style: italic;
-    color: var(--fg-dim);
-    font-weight: 400;
+  .bar-nav a:last-child{ border-right: 1px solid var(--line-2); }
+  .bar-nav a:hover{ color: var(--ink-1); background: var(--bg-2); }
+  .bar-nav a[aria-current="true"]{
+    color: var(--signal);
+    background: var(--bg-3);
+    box-shadow: inset 0 -2px 0 var(--signal);
   }
-  @media (max-width: 640px){
-    .section-head{ grid-template-columns: 1fr; gap: 6px; }
-  }
+}
+.bar-status{
+  display: flex; align-items: center; gap: 0.45rem;
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.bar-status .dot{
+  width: 0.4rem; height: 0.4rem;
+  background: var(--signal);
+  animation: blink 2.4s steps(2, end) infinite;
+}
+@keyframes blink{ 0%,60%{opacity:1} 61%,100%{opacity:0.25} }
+@media (prefers-reduced-motion: reduce){ .bar-status .dot{ animation: none; } }
+@media (max-width: 560px){ .bar-status{ display: none; } }
 
-  /* ------- hero ------- */
-  .hero{
-    padding: 80px 0 48px;
+/* the scroll measure, drawn on the bar's bottom edge */
+.bar-progress{
+  position: absolute; left: 0; bottom: -1px;
+  height: 2px; width: 0;
+  background: var(--signal);
+}
+
+/* mobile nav */
+.bar-menu{ display: inline-flex; align-items: center; gap: 0.35rem; font-family: var(--mono); font-size: var(--t-3xs); letter-spacing: 0.1em; text-transform: uppercase; }
+@media (min-width: 900px){ .bar-menu{ display: none; } }
+.sheet{
+  position: fixed; inset: 0; z-index: 80;
+  background: var(--bg-1);
+  display: none;
+  padding: 0 var(--gutter) 2rem;
+  overflow-y: auto;
+}
+.sheet.show{ display: block; }
+.sheet-top{
+  display: flex; align-items: center; justify-content: space-between;
+  height: var(--bar);
+  border-bottom: 1px solid var(--line);
+}
+.sheet ul{ margin-top: 0.5rem; }
+.sheet li{ border-bottom: 1px solid var(--line-2); }
+.sheet a{
+  display: flex; align-items: baseline; justify-content: space-between;
+  padding: 1rem 0;
+  font-size: 1.6rem; font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--ink-1);
+}
+.sheet a span{ font-family: var(--mono); font-size: var(--t-3xs); color: var(--signal); letter-spacing: 0.1em; }
+
+/* --------------------------------------------------------------------------
+   SHELL
+   -------------------------------------------------------------------------- */
+.shell{
+  position: relative;
+  z-index: 2;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.layout{ padding-block: 2rem 3rem; }
+@media (min-width: 1024px){
+  .layout{
     display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: 32px;
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    column-gap: 1px;
+    align-items: start;
   }
-  .hero .col-left{
-    display: flex;
-    flex-direction: column;
-    gap: 22px;
+  .rail{
+    position: sticky; top: var(--bar);
+    max-height: calc(100svh - var(--bar));
+    padding: 1.5rem 1.25rem 1.5rem 0;
+    border-right: 1px solid var(--line);
   }
+  .content{ padding-left: 1.75rem; }
+}
+@media (max-width: 1023px){
+  .rail{ padding-block: 1.25rem 0; }
+  .content{ padding-top: 1.5rem; }
+}
 
-  /* ------- avatar / profile picture ------- */
-  .avatar{
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background: var(--bg-2);
-    border: 1px solid var(--line-2);
-    overflow: hidden;
-    position: relative;
-    display: flex; align-items: center; justify-content: center;
-    /* subtle inner glow */
-    box-shadow: inset 0 0 0 1px rgba(255,90,31,0.08),
-                0 0 0 6px rgba(255,90,31,0.04);
-    transition: box-shadow .25s ease;
+/* --------------------------------------------------------------------------
+   RAIL
+   -------------------------------------------------------------------------- */
+.avatar{
+  display: block;
+  width: 3.5rem; height: 3.5rem;
+  background: var(--bg-4);
+  overflow: hidden;
+  border: 1px solid var(--line-3);
+  transition: border-color .2s;
+}
+.avatar:hover{ border-color: var(--signal); }
+.avatar img{
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.08);
+  transition: filter .3s;
+}
+.avatar:hover img{ filter: grayscale(0.4) contrast(1.05); }
+@media (min-width: 1024px){ .avatar{ width: 4.5rem; height: 4.5rem; margin-bottom: 1.1rem; } }
+
+.rail-head{ display: flex; align-items: center; gap: 0.9rem; }
+@media (min-width: 1024px){ .rail-head{ display: block; } .rail-head > div{ display: block; } }
+
+.rail-name{
+  font-size: var(--t-xl);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--ink-1);
+}
+@media (min-width: 1024px){ .rail-name{ font-size: var(--t-2xl); } }
+
+.rail-role{
+  margin-top: 0.25rem;
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+
+/* the rail data block — measured rows, like a spec plate */
+.rail-data{
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+.rail-row{
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--line-2);
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.rail-row dt{ color: var(--ink-3); }
+.rail-row dd{ color: var(--ink-1); text-align: right; }
+
+.rail-nav{ display: none; margin-top: 1.5rem; }
+@media (min-width: 1024px){ .rail-nav{ display: block; } }
+.rail-nav ul{ display: grid; gap: 1px; }
+.rail-nav a{
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0;
+  font-size: var(--t-m);
+  color: var(--ink-3);
+  transition: color .15s;
+}
+.rail-nav a::before{
+  content: "";
+  width: 0.5rem; height: 1px;
+  background: var(--line-3);
+  transition: width .3s var(--ease), background-color .15s;
+  flex-shrink: 0;
+}
+.rail-nav a:hover{ color: var(--ink-1); }
+.rail-nav a:hover::before{ width: 1rem; }
+.rail-nav a[aria-current="true"]{ color: var(--ink-1); font-weight: 500; }
+.rail-nav a[aria-current="true"]::before{ width: 1.4rem; background: var(--signal); }
+
+.rail-links{
+  display: flex; flex-wrap: wrap; gap: 0.3rem 0.8rem;
+  margin-top: 1.25rem;
+  font-family: var(--mono); font-size: var(--t-3xs);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+.rail-links a{ transition: color .2s; }
+.rail-links a:hover{ color: var(--signal); }
+
+@media (max-width: 1023px){
+  .rail-nav-mobile{
+    display: flex; gap: 1rem;
+    overflow-x: auto;
+    margin-top: 1rem; padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono); font-size: var(--t-3xs);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--ink-3);
+    scrollbar-width: none;
   }
-  .avatar:hover{
-    box-shadow: inset 0 0 0 1px rgba(255,90,31,0.15),
-                0 0 0 8px rgba(255,90,31,0.08);
+  .rail-nav-mobile::-webkit-scrollbar{ display: none; }
+  .rail-nav-mobile a{ white-space: nowrap; }
+  .rail-nav-mobile a[aria-current="true"]{ color: var(--signal); }
+}
+@media (min-width: 1024px){ .rail-nav-mobile{ display: none; } }
+
+/* --------------------------------------------------------------------------
+   PANELS — sharp, hairline-separated, panel-headered
+   -------------------------------------------------------------------------- */
+.panel{
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  position: relative;
+}
+/* the notch corner — a neo-futurist tell */
+.panel--notch::after{
+  content: "";
+  position: absolute; top: -1px; right: -1px;
+  width: 0.9rem; height: 0.9rem;
+  background: var(--bg-1);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  border-left: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.panel-head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-2);
+}
+.panel-head .h-id{
+  display: flex; align-items: center; gap: 0.45rem;
+  font-family: var(--mono); font-size: var(--t-3xs);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+.panel-head .h-id b{ color: var(--signal); font-weight: 500; }
+.panel-head .h-meta{
+  font-family: var(--mono); font-size: var(--t-3xs);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+.panel-body{ padding: 0.9rem 0.85rem; }
+@media (min-width: 640px){ .panel-body{ padding: 1.25rem 1.15rem; } }
+
+/* --------------------------------------------------------------------------
+   HERO
+   -------------------------------------------------------------------------- */
+.hero{ margin-bottom: 1rem; }
+.hero-name{
+  font-size: var(--t-5xl);
+  font-weight: 600;
+  line-height: 0.84;
+  letter-spacing: -0.055em;
+  color: var(--ink-1);
+  text-wrap: balance;
+  margin-top: 0.75rem;
+}
+.hero-name .cut{
+  display: block;
+  color: var(--signal);
+}
+/* the tracked-out ornament above the name */
+.hero-ornament{
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--ink-3);
+}
+.hero-ornament .line{ flex: 1; height: 1px; background: var(--line); }
+
+.hero-lede{
+  margin-top: 1.5rem;
+  max-width: 46ch;
+  font-size: var(--t-l);
+  line-height: 1.5;
+  color: var(--ink-2);
+  letter-spacing: -0.012em;
+  text-wrap: pretty;
+}
+.hero-lede strong{ color: var(--ink-1); font-weight: 500; }
+
+.hero-stats{
+  display: flex; flex-wrap: wrap;
+  gap: 0.4rem 1.4rem;
+  margin-top: 1.5rem;
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.hero-stats b{
+  color: var(--bone);
+  font-size: var(--t-m);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-right: 0.15rem;
+}
+
+.hero-actions{
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 0.4rem 0.9rem;
+  margin-top: 1.25rem;
+  font-size: var(--t-m);
+}
+.btn{
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  padding: 0.55rem 1rem;
+  background: var(--accent);
+  color: #1A2118;
+  font-size: var(--t-m);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  border: 1px solid var(--accent);
+  transition: background-color .18s, color .18s, border-color .18s;
+}
+.btn:hover{ background: var(--bone); border-color: var(--bone); color: #1A2118; }
+.btn .ar{ transition: transform .3s var(--ease); }
+.btn:hover .ar{ transform: translateX(3px); }
+
+.link-plain{ color: var(--ink-3); transition: color .18s; }
+.link-plain:hover{ color: var(--ink-1); }
+
+/* --------------------------------------------------------------------------
+   DATA STRIP — the facts as a measured readout
+   -------------------------------------------------------------------------- */
+.readout{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: 1rem;
+}
+@media (min-width: 620px){ .readout{ grid-template-columns: repeat(4, minmax(0,1fr)); } }
+.readout-cell{
+  background: var(--bg-3);
+  padding: 0.75rem 0.8rem;
+  transition: background-color .2s;
+}
+.readout-cell:hover{ background: var(--bg-2); }
+.readout-num{
+  font-size: var(--t-2xl);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--ink-1);
+  font-variant-numeric: tabular-nums;
+}
+.readout-cell:first-child .readout-num{ color: var(--signal); }
+.readout-label{
+  margin-top: 0.35rem;
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  line-height: 1.35;
+}
+
+/* --------------------------------------------------------------------------
+   SECTION
+   -------------------------------------------------------------------------- */
+.section{ margin-bottom: 1.75rem; }
+.section:last-child{ margin-bottom: 0; }
+
+.sec-bar{
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--line);
+}
+.sec-num{
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.1em;
+  color: var(--signal);
+}
+.sec-title{
+  font-size: var(--t-m);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink-1);
+}
+.sec-fill{ flex: 1; height: 1px; background: var(--line-2); }
+.sec-count{
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* --------------------------------------------------------------------------
+   ENTRY
+   -------------------------------------------------------------------------- */
+.entry{ padding: 0.9rem 0; border-bottom: 1px solid var(--line-2); }
+.entry:first-child{ padding-top: 0; }
+.entry:last-child{ border-bottom: 0; padding-bottom: 0; }
+
+.entry-top{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.2rem 0.75rem;
+}
+.entry-when{
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+.entry-place{
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.entry-title{
+  margin-top: 0.3rem;
+  font-size: var(--t-l);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.022em;
+  color: var(--ink-1);
+}
+.entry-org{
+  margin-top: 0.1rem;
+  font-size: var(--t-m);
+  color: var(--ink-3);
+}
+.entry-org a{ color: var(--ink-2); border-bottom: 1px solid var(--line-3); transition: color .2s, border-color .2s; }
+.entry-org a:hover{ color: var(--signal); border-color: var(--signal); }
+
+.entry-points{ margin-top: 0.6rem; display: grid; gap: 0.25rem; }
+.entry-points li{
+  position: relative;
+  padding-left: 0.9rem;
+  font-size: var(--t-m);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.entry-points li::before{
+  content: "";
+  position: absolute;
+  left: 0; top: 0.68em;
+  width: 0.3rem; height: 1px;
+  background: var(--ink-4);
+}
+
+/* --------------------------------------------------------------------------
+   LEDGER — awards as a data table
+   -------------------------------------------------------------------------- */
+.ledger{ }
+.ledger-item{
+  display: grid;
+  grid-template-columns: 2.6rem minmax(0,1fr) auto;
+  gap: 0.6rem;
+  align-items: baseline;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--line-2);
+  transition: background-color .15s;
+}
+.ledger-item:last-child{ border-bottom: 0; }
+.ledger-item:hover{ background: var(--bg-2); }
+.ledger-rank{
+  font-family: var(--mono);
+  font-size: var(--t-s);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+.ledger-item.first .ledger-rank{ color: var(--signal); }
+.ledger-name{ font-size: var(--t-m); font-weight: 500; color: var(--ink-1); line-height: 1.3; }
+.ledger-org{ font-size: var(--t-s); color: var(--ink-3); margin-top: 0.05rem; }
+.ledger-when{
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   CASE
+   -------------------------------------------------------------------------- */
+.case{
+  background: var(--bg-3);
+  border: 1px solid var(--line);
+  margin-bottom: 1px;
+}
+.case:hover{ border-color: var(--line-3); }
+.case-btn{ display: block; width: 100%; text-align: left; padding: 0.9rem 0.85rem; }
+
+.case-kicker{
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: 0.2rem 0.7rem;
+  font-family: var(--mono); font-size: var(--t-3xs);
+  letter-spacing: 0.09em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+.case-id{ color: var(--signal); }
+.case-status.live{ color: var(--ink-1); }
+.case-status.live::before{
+  content: "";
+  display: inline-block;
+  width: 0.3rem; height: 0.3rem;
+  background: var(--signal);
+  margin-right: 0.3rem;
+  vertical-align: 0.1em;
+}
+
+.case-name{
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+  font-size: var(--t-2xl);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.038em;
+  color: var(--ink-1);
+}
+.case-mark{
+  font-family: var(--mono);
+  font-size: var(--t-s);
+  color: var(--signal);
+  flex-shrink: 0;
+  transition: transform .35s var(--ease);
+}
+.case[data-open="true"] .case-mark{ transform: rotate(45deg); }
+
+.case-dek{
+  margin-top: 0.4rem;
+  max-width: 58ch;
+  font-size: var(--t-m);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+
+.case-body{ padding: 0 0.85rem 0.9rem; }
+
+.case-field{
+  display: grid;
+  gap: 0.1rem 1rem;
+  padding: 0.55rem 0;
+  border-top: 1px solid var(--line-2);
+}
+@media (min-width: 620px){ .case-field{ grid-template-columns: 5.5rem minmax(0,1fr); } }
+.case-field dt{
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--signal);
+  padding-top: 0.2rem;
+}
+.case-field dd{
+  min-width: 0;
+  font-size: var(--t-m);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.case-field dd ul{ display: grid; gap: 0.2rem; }
+.case-field dd li{ position: relative; padding-left: 0.75rem; }
+.case-field dd li::before{
+  content: "";
+  position: absolute; left: 0; top: 0.68em;
+  width: 0.28rem; height: 1px;
+  background: var(--ink-4);
+}
+.case-field code{
+  font-family: var(--mono);
+  font-size: 0.86em;
+  background: var(--bg-4);
+  padding: 0.05em 0.28em;
+  color: var(--ink-1);
+}
+
+.matrix{ width: 100%; border-collapse: collapse; font-size: var(--t-s); }
+.matrix th{
+  text-align: left;
+  padding: 0 0.6rem 0.25rem 0;
+  border-bottom: 1px solid var(--line-3);
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  font-weight: 400;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.matrix td{
+  padding: 0.3rem 0.6rem 0.3rem 0;
+  border-bottom: 1px solid var(--line-2);
+  vertical-align: top;
+  color: var(--ink-2);
+}
+.matrix tr:last-child td{ border-bottom: 0; }
+.matrix td:first-child{ color: var(--ink-1); }
+.mk{ font-family: var(--mono); font-size: var(--t-3xs); white-space: nowrap; }
+.mk.y{ color: var(--moss); }
+.mk.n{ color: var(--signal); }
+.mk.p{ color: var(--ink-3); }
+
+.case-foot{
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 0.35rem 0.9rem;
+  margin-top: 0.6rem;
+}
+.case-link{
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--signal);
+  border-bottom: 1px solid var(--signal-40);
+  transition: border-color .18s;
+}
+.case-link:hover{ border-color: var(--signal); }
+.case-tags{ margin-left: auto; display: flex; flex-wrap: wrap; gap: 0.2rem; }
+.tag{
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  border: 1px solid var(--line);
+  padding: 0.1rem 0.35rem;
+}
+
+/* --------------------------------------------------------------------------
+   REPO GRID — hairline grid, no radius
+   -------------------------------------------------------------------------- */
+.repos{
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+@media (min-width: 560px){ .repos{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.repo{
+  display: block;
+  background: var(--bg-3);
+  padding: 0.8rem;
+  transition: background-color .18s;
+}
+.repo:hover{ background: var(--bg-2); }
+.repo-top{ display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; }
+.repo-name{
+  font-size: var(--t-m);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--ink-1);
+  transition: color .18s;
+}
+.repo:hover .repo-name{ color: var(--signal); }
+.repo-lang{
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+.repo-note{
+  margin-top: 0.3rem;
+  font-size: var(--t-s);
+  line-height: 1.45;
+  color: var(--ink-3);
+}
+
+/* --------------------------------------------------------------------------
+   KIT — spec table
+   -------------------------------------------------------------------------- */
+.kit{ border: 1px solid var(--line); background: var(--bg-3); }
+.kit-row{
+  display: grid;
+  gap: 0.1rem 1rem;
+  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid var(--line-2);
+}
+@media (min-width: 560px){ .kit-row{ grid-template-columns: 9.5rem minmax(0,1fr); align-items: baseline; } }
+.kit-row:last-child{ border-bottom: 0; }
+.kit-group{
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--signal);
+}
+.kit-items{ font-size: var(--t-m); line-height: 1.5; color: var(--ink-2); }
+
+/* certs as a 2-up grid of small panels */
+.certs{
+  display: grid; gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-top: 0;
+  margin-top: 0.5rem;
+}
+@media (min-width: 560px){ .certs{ grid-template-columns: repeat(2, minmax(0,1fr)); } }
+.cert{ background: var(--bg-3); padding: 0.65rem 0.8rem; }
+.cert-name{ font-size: var(--t-m); font-weight: 500; color: var(--ink-1); line-height: 1.35; }
+.cert-issuer{
+  margin-top: 0.15rem;
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* --------------------------------------------------------------------------
+   TEST POINT
+   -------------------------------------------------------------------------- */
+.tp{ border: 1px solid var(--line); background: var(--bg-3); }
+.tp-bar{
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.4rem 0.8rem;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-2);
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.tp-bar .tp-id{ color: var(--signal); }
+.tp-in{ padding: 0.85rem 0.8rem; }
+.tp-ask{
+  font-size: var(--t-m);
+  line-height: 1.55;
+  color: var(--ink-2);
+  max-width: 46ch;
+}
+.tp-ask strong{ color: var(--ink-1); font-weight: 500; }
+
+.tp-code{
+  margin-top: 0.6rem;
+  padding: 0.65rem 0.7rem;
+  background: var(--bg-1);
+  border: 1px solid var(--line-2);
+  border-left: 2px solid var(--signal);
+  font-family: var(--mono);
+  font-size: var(--t-xs);
+  line-height: 1.7;
+  color: var(--ink-1);
+  overflow-x: auto;
+}
+.tp-code .k{ color: var(--signal); }
+.tp-code .n{ color: var(--ink-3); }
+.tp-code .c{ color: var(--ink-4); }
+
+.tp-form{ display: flex; gap: 1px; margin-top: 0.6rem; background: var(--line); }
+.tp-form input{
+  flex: 1 1 auto; min-width: 0;
+  padding: 0.5rem 0.6rem;
+  border: 0;
+  background: var(--bg-3);
+  color: var(--ink-1);
+  font-family: var(--mono);
+  font-size: var(--t-xs);
+}
+.tp-form input:focus{ outline: none; box-shadow: inset 0 0 0 2px var(--signal); }
+.tp-form input::placeholder{ color: var(--ink-4); }
+.tp-form button{
+  padding: 0.5rem 0.9rem;
+  background: var(--accent);
+  color: #1A2118;
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background-color .18s;
+}
+.tp-form button:hover{ background: var(--bone); }
+.tp-form button:disabled{ opacity: .5; cursor: default; }
+
+.tp-out{
+  margin-top: 0.5rem;
+  min-height: 1.1rem;
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.04em;
+  color: var(--ink-3);
+}
+.tp-out.ok{ color: var(--ink-1); }
+.tp-out.ok::before{ content: "▸ "; color: var(--signal); }
+.tp-out.err{ color: var(--signal); }
+
+.tp-sol{ margin-top: 0.6rem; border-top: 1px dashed var(--line); padding-top: 0.5rem; }
+.tp-sol summary{
+  cursor: pointer; list-style: none;
+  font-family: var(--mono); font-size: var(--t-3xs);
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--signal);
+}
+.tp-sol summary::-webkit-details-marker{ display: none; }
+.tp-sol summary::before{ content: "[+] "; }
+.tp-sol[open] summary::before{ content: "[\2212] "; }
+.tp-sol p{
+  margin-top: 0.4rem;
+  font-size: var(--t-s);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.tp-sol code{
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--bg-4);
+  padding: 0.05em 0.25em;
+  color: var(--ink-1);
+}
+
+/* --------------------------------------------------------------------------
+   CONTACT — the signal panel
+   -------------------------------------------------------------------------- */
+.contact{
+  position: relative;
+  background:
+    radial-gradient(120% 120% at 0% 0%, rgba(217,94,98,0.14), transparent 62%),
+    var(--bg-2);
+  color: var(--ink-1);
+  border: 1px solid rgba(217,94,98,0.32);
+  overflow: hidden;
+  padding: 1.5rem 1.15rem;
+}
+@media (min-width: 768px){ .contact{ padding: 2.25rem 1.75rem; } }
+.contact::before{
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(214,199,166,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(214,199,166,0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+}
+.contact-in{ position: relative; }
+.contact-line{
+  font-size: var(--t-3xl);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: -0.045em;
+}
+.contact-line .cut{ color: var(--signal); }
+.contact-sub{
+  margin-top: 0.6rem;
+  max-width: 42ch;
+  font-size: var(--t-m);
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.contact-links{
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 0.4rem 1rem;
+  margin-top: 1.25rem;
+  font-size: var(--t-m);
+}
+.contact-links a{ color: var(--ink-2); transition: color .18s; }
+.contact-links a:hover{ color: var(--bone); }
+.contact-links .primary{
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.5rem 0.95rem;
+  background: var(--accent);
+  color: #1A2118;
+  font-weight: 500;
+  transition: background-color .18s;
+}
+.contact-links .primary:hover{ background: var(--bone); }
+.copy-note{
+  margin-top: 0.5rem;
+  min-height: 1rem;
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.06em;
+  color: var(--signal);
+}
+
+/* --------------------------------------------------------------------------
+   FOOTER
+   -------------------------------------------------------------------------- */
+.foot{
+  max-width: var(--max);
+  margin-inline: auto;
+  padding: 1rem var(--gutter) 1.75rem;
+  display: flex; flex-wrap: wrap;
+  gap: 0.35rem 1rem;
+  justify-content: space-between; align-items: baseline;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.foot a:hover{ color: var(--signal); }
+
+/* --------------------------------------------------------------------------
+   reveal
+   -------------------------------------------------------------------------- */
+.reveal{ opacity: 1; }
+.reveal-pending{ opacity: 0; transform: translateY(10px); }
+.reveal-pending.in{
+  opacity: 1; transform: none;
+  transition: opacity .5s var(--ease), transform .5s var(--ease);
+}
+@media (prefers-reduced-motion: reduce){
+  .reveal-pending, .reveal-pending.in{
+    opacity: 1 !important; transform: none !important; transition: none !important;
   }
-  .avatar img{
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-  .avatar .initials{
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 52px;
-    color: var(--accent);
-    line-height: 1;
-    letter-spacing: -0.02em;
-  }
-  /* corner registration marks for "dossier" feel */
-  .avatar::before, .avatar::after{
+}
+
+
+/* --------------------------------------------------------------------------
+   INTERACTIVE LAYER
+   Static labels replaced with things that respond.
+   -------------------------------------------------------------------------- */
+
+/* 1. cursor spotlight — a soft mint pool that follows the pointer */
+.spot{
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .4s ease;
+  background: radial-gradient(420px circle at var(--sx,50%) var(--sy,50%),
+              rgba(217,94,98,0.075), transparent 70%);
+}
+body:hover .spot{ opacity: 1; }
+
+/* 2. magnetic nav — the active tick slides between items */
+.bar-nav a{ position: relative; }
+.bar-nav a::after{
+  content: "";
+  position: absolute; left: .8rem; right: .8rem; bottom: 0;
+  height: 2px; background: var(--accent);
+  transform: scaleX(0); transform-origin: center;
+  transition: transform .38s var(--ease);
+}
+.bar-nav a[aria-current="true"]::after{ transform: scaleX(1); }
+.bar-nav a[aria-current="true"]{ box-shadow: none; }
+
+/* 3. the stat numbers count up when they enter view */
+.count{
+  font-variant-numeric: tabular-nums;
+  transition: color .3s;
+}
+.count.done{ color: var(--accent); }
+
+/* 4. ledger rows reveal their detail on hover instead of printing it */
+.ledger-item{ cursor: default; }
+.ledger-item .ledger-org{
+  max-height: 0; overflow: hidden; opacity: 0;
+  transition: max-height .32s var(--ease), opacity .25s ease, margin .32s ease;
+  margin-top: 0;
+}
+.ledger-item:hover .ledger-org,
+.ledger-item:focus-within .ledger-org{
+  max-height: 2rem; opacity: 1; margin-top: .1rem;
+}
+@media (hover: none){
+  .ledger-item .ledger-org{ max-height: 2rem; opacity: 1; margin-top: .1rem; }
+}
+
+/* 5. case rows: the label column lights up as you read across */
+.case-field{ transition: background-color .2s; }
+.case-field:hover{ background: rgba(214,199,166,0.035); }
+
+/* 6. kit items: each tool is a chip that lifts */
+.kit-items{ line-height: 2; }
+.kit-items span{
+  display: inline-block;
+  padding: 0 .34rem;
+  margin: 0 .05rem;
+  border: 1px solid transparent;
+  transition: border-color .18s, color .18s, background-color .18s, transform .18s var(--ease);
+  cursor: default;
+}
+.kit-items span:hover{
+  border-color: rgba(217,94,98,0.45);
+  background: rgba(217,94,98,0.07);
+  color: var(--bone);
+  transform: translateY(-1px);
+}
+
+/* 7. test point: after solving, the whole panel turns */
+.tp.solved{ border-color: rgba(217,94,98,0.55); }
+.tp.solved .tp-bar{ background: rgba(217,94,98,0.10); }
+.tp.solved .tp-bar .tp-id{ color: var(--bone); }
+
+/* 8. links draw their underline from the click point outward */
+.bar-id, .entry-org a, .case-link, .rail-links a, .foot a{
+  position: relative;
+}
+.entry-org a::after, .case-link::after{
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: -1px;
+  height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .32s var(--ease);
+}
+.entry-org a:hover::after, .case-link:hover::after{ transform: scaleX(1); }
+.entry-org a:hover, .case-link:hover{ border-color: transparent; }
+
+/* 9. the top bar hides on scroll down, returns on scroll up */
+.bar{ transition: transform .32s var(--ease), background-color .3s; }
+.bar.tucked{ transform: translateY(-100%); }
+
+/* --------------------------------------------------------------------------
+   print
+   -------------------------------------------------------------------------- */
+@media print{
+  .skip, .rail-links, .rail-nav, .rail-nav-mobile, .tp-form, .tp-sol, .bar, .sheet{ display: none !important; }
+  html, body{ background: #fff !important; color: #000 !important; background-image: none !important; }
+  body::before{ display: none !important; }
+  .reveal-pending{ opacity: 1 !important; transform: none !important; }
+  .layout{ display: block !important; }
+  .rail{ position: static !important; max-height: none !important; border: 0 !important; padding: 0 0 1rem !important; }
+  .content{ padding-left: 0 !important; }
+  .panel, .case, .repo, .kit, .tp, .cert, .readout-cell{ border: 1px solid #ccc !important; background: #fff !important; break-inside: avoid; }
+  .contact{ background: #fff !important; color: #000 !important; border-color: #ccc !important; }
+  .contact::before{ display: none !important; }
+  .contact-line, .contact-sub, .contact-links a{ color: #000 !important; }
+  .hero-name{ color: #000 !important; }
+  .hero-name .cut{ color: #b3000a !important; }
+  .case-body{ display: block !important; }
+  .case-mark{ display: none !important; }
+  a{ text-decoration: underline !important; color: #000 !important; }
+  .section{ margin-bottom: 1rem !important; }
+}
+
+/* ==========================================================================
+   INDUSTRIAL / JAPANESE SCI-FI
+   Palette is unchanged. This layer adds the industrial-plate vocabulary:
+   framed panels with corner ticks, kanji gutters, HUD strips, barcode rules,
+   vertical writing, registration marks.
+   ========================================================================== */
+
+:root{
+  --frame:    rgba(214,199,166,0.16);
+  --frame-hi: rgba(217,94,98,0.42);
+  --jp:       rgba(214,199,166,0.42);
+}
+
+/* ---- JP type stack: system fonts that carry CJK ---- */
+.jp{
+  font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic",
+               "Noto Sans JP", "Noto Sans CJK JP", "Source Han Sans JP",
+               "YuGothic", Meiryo, sans-serif;
+  font-weight: 500;
+  font-feature-settings: "palt";
+}
+
+/* ==========================================================================
+   1. PANEL FRAME — the industrial plate. Corner ticks, not a border box.
+   ========================================================================== */
+.plate{
+  position: relative;
+  background: var(--bg-3);
+  border: 1px solid var(--frame);
+}
+/* corner registration ticks */
+.plate::before,
+.plate::after{
+  content: "";
+  position: absolute;
+  width: 0.6rem; height: 0.6rem;
+  border-color: var(--frame-hi);
+  border-style: solid;
+  pointer-events: none;
+}
+.plate::before{ top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+.plate::after{ bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+
+/* the section title bar — a HUD strip */
+.hud{
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.7rem;
+  border-bottom: 1px solid var(--frame);
+  background: var(--bg-2);
+}
+.hud .hud-no{
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+.hud .hud-en{
+  font-size: var(--t-m);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  color: var(--bone);
+}
+.hud .hud-jp{
+  font-size: var(--t-xs);
+  letter-spacing: 0.22em;
+  color: var(--jp);
+}
+.hud .hud-fill{ flex: 1; height: 1px; background: var(--frame); }
+.hud .hud-dots{
+  display: flex; gap: 2px;
+}
+.hud .hud-dots i{
+  width: 3px; height: 3px;
+  background: var(--frame-hi);
+  display: block;
+}
+.hud .hud-dots i:nth-child(n+3){ background: var(--frame); }
+
+/* ==========================================================================
+   2. VERTICAL JP GUTTER — runs down the side of the landing page
+   ========================================================================== */
+.vgutter{
+  position: absolute;
+  top: 0; bottom: 0;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.4rem;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-family: "Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP",sans-serif;
+  font-size: 0.625rem;
+  letter-spacing: 0.42em;
+  color: rgba(214,199,166,0.30);
+  pointer-events: none;
+  user-select: none;
+}
+@media (min-width: 1100px){ .vgutter{ display: flex; } }
+.vgutter.left{ left: 0.5rem; }
+.vgutter.right{ right: 0.5rem; align-items: flex-end; }
+.vgutter b{ color: rgba(217,94,98,0.55); font-weight: 500; }
+
+/* ==========================================================================
+   3. BARCODE + MEASURE RULES
+   ========================================================================== */
+.barcode{
+  display: flex;
+  align-items: flex-end;
+  gap: 1px;
+  height: 1.1rem;
+  opacity: 0.45;
+}
+.barcode i{
+  display: block;
+  background: var(--bone);
+  width: 1px;
+  height: 100%;
+}
+.barcode i:nth-child(3n){ width: 2px; height: 78%; }
+.barcode i:nth-child(4n){ height: 60%; }
+.barcode i:nth-child(7n){ width: 3px; height: 90%; }
+
+/* a horizontal measure rule with end ticks */
+.measure{
+  position: relative;
+  height: 1px;
+  background: var(--frame);
+}
+.measure::before,
+.measure::after{
+  content: "";
+  position: absolute; top: -3px;
+  width: 1px; height: 7px;
+  background: var(--frame);
+}
+.measure::before{ left: 0; }
+.measure::after{ right: 0; }
+
+/* ==========================================================================
+   4. LANDING — industrial treatment
+   ========================================================================== */
+.landing-name{
+  position: relative;
+  padding-left: 1.6rem;
+}
+/* the kanji label pinned to the name block */
+.landing-name::before{
+  content: "氏名";
+  position: absolute;
+  left: 0; top: 0.5rem;
+  writing-mode: vertical-rl;
+  font-family: "Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Noto Sans JP",sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: rgba(217,94,98,0.55);
+}
+
+.landing-top-strip{
+  position: absolute;
+  top: calc(var(--bar) + 0.5rem);
+  left: var(--gutter);
+  right: var(--gutter);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--mono);
+  font-size: var(--t-3xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-4);
+  pointer-events: none;
+}
+.landing-top-strip .st-l{ display: flex; align-items: center; gap: 0.6rem; }
+.landing-top-strip .st-r{ display: flex; align-items: center; gap: 0.8rem; }
+
+/* the photo gets a technical frame + scanline */
+.landing-photo{ position: relative; }
+.landing-photo::before{
+  content: "";
+  position: absolute; inset: -0.5rem;
+  border: 1px solid var(--frame);
+  pointer-events: none;
+  border-radius: 1.4rem;
+}
+.landing-photo .corner{
+  position: absolute;
+  width: 0.7rem; height: 0.7rem;
+  border-color: var(--frame-hi);
+  border-style: solid;
+  pointer-events: none;
+  z-index: 3;
+}
+.landing-photo .corner.tl{ top: -0.5rem; left: -0.5rem; border-width: 1px 0 0 1px; }
+.landing-photo .corner.tr{ top: -0.5rem; right: -0.5rem; border-width: 1px 1px 0 0; }
+.landing-photo .corner.bl{ bottom: -0.5rem; left: -0.5rem; border-width: 0 0 1px 1px; }
+.landing-photo .corner.br{ bottom: -0.5rem; right: -0.5rem; border-width: 0 1px 1px 0; }
+
+/* scanline sweep over the portrait */
+.landing-photo .scan{
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 1.25rem;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(214,199,166,0.055) 0 1px,
+    transparent 1px 3px
+  );
+  mix-blend-mode: overlay;
+}
+
+/* ==========================================================================
+   5. SECTION PLATES — wrap each section in the industrial frame
+   ========================================================================== */
+.section{ position: relative; }
+.section .sec-bar{
+  border-bottom: 1px solid var(--frame);
+  padding-bottom: 0.45rem;
+  margin-bottom: 0.75rem;
+}
+.sec-jp{
+  font-size: var(--t-xs);
+  letter-spacing: 0.24em;
+  color: var(--jp);
+}
+
+/* the whole content column gets a left measure line */
+.content{ position: relative; }
+@media (min-width: 860px){
+  .content::before{
     content: "";
     position: absolute;
-    width: 10px; height: 10px;
-    border: 1px solid var(--accent);
-    opacity: 0.5;
+    left: -1.1rem; top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom,
+      transparent 0,
+      var(--frame) 8%,
+      var(--frame) 92%,
+      transparent 100%);
   }
-  .avatar::before{ top: -4px; left: -4px; border-right: none; border-bottom: none; }
-  .avatar::after{ bottom: -4px; right: -4px; border-left: none; border-top: none; }
+}
 
-  .hero .meta{
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--fg-dim);
-    line-height: 1.9;
-  }
-  .hero .meta span{ color: var(--accent); }
-  .hero h1{
-    margin: 0 0 12px;
-    font-family: var(--serif);
-    font-weight: 400;
-    font-size: clamp(44px, 7.5vw, 92px);
-    line-height: 0.98;
-    letter-spacing: -0.02em;
-  }
-  .hero h1 .handle{
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 0.28em;
-    vertical-align: middle;
-    color: var(--accent);
-    padding: 4px 10px;
-    border: 1px solid var(--accent);
-    border-radius: 999px;
-    margin-left: 14px;
-    transform: translateY(-12px);
-    letter-spacing: 0.05em;
-  }
-  .hero .tagline{
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--accent);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    margin: 18px 0 26px;
-  }
-  .hero p.intro{
-    max-width: 62ch;
-    font-size: 17px;
-    color: var(--fg);
-    line-height: 1.6;
-  }
-  .hero .links{
-    margin-top: 28px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-  .btn{
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--mono);
-    font-size: 12px;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 10px 14px;
-    border: 1px solid var(--line-2);
-    border-radius: 4px;
-    color: var(--fg);
-    background: var(--bg-2);
-    transition: all .15s ease;
-  }
-  .btn:hover{
-    border-color: var(--accent);
-    color: var(--accent);
-    transform: translateY(-1px);
-  }
-  .btn .arrow{ transition: transform .15s ease; }
-  .btn:hover .arrow{ transform: translate(2px,-2px); }
+/* ==========================================================================
+   6. ENTRY / LEDGER / KIT — industrial detailing
+   ========================================================================== */
+.entry-top{
+  padding-bottom: 0.3rem;
+  border-bottom: 1px dotted rgba(214,199,166,0.13);
+}
+.entry-when::before{ content: "▸ "; color: var(--frame-hi); }
 
-  @media (max-width: 640px){
-    .hero{ grid-template-columns: 1fr; gap: 24px; padding-top: 48px; }
-    .hero .col-left{ flex-direction: row; align-items: center; gap: 20px; }
-    .avatar{ width: 92px; height: 92px; }
-    .avatar .initials{ font-size: 38px; }
-    .hero h1 .handle{ display: inline-block; margin-left: 8px; transform: translateY(-6px); font-size: 12px; }
-  }
+.ledger-item{
+  border-bottom: 1px solid rgba(214,199,166,0.07);
+  position: relative;
+}
+.ledger-item:hover::before{
+  content: "";
+  position: absolute; left: -0.55rem; top: 50%;
+  width: 0.3rem; height: 1px;
+  background: var(--accent);
+}
 
-  /* ------- skills ------- */
-  .skills-grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1px;
-    background: var(--line);
-    border: 1px solid var(--line);
-  }
-  .skill-cat{
-    background: var(--bg);
-    padding: 22px;
-    transition: background .2s ease;
-  }
-  .skill-cat:hover{ background: var(--bg-2); }
-  .skill-cat h3{
-    margin: 0 0 14px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    display: flex; align-items: center; gap: 8px;
-  }
-  .skill-cat h3::before{
-    content: "▸";
-    color: var(--accent);
-  }
-  .skill-cat ul{
-    margin: 0; padding: 0; list-style: none;
-    display: flex; flex-wrap: wrap; gap: 6px;
-  }
-  .skill-cat li{
-    font-size: 13px;
-    color: var(--fg);
-    padding: 4px 10px;
-    background: var(--bg-2);
-    border: 1px solid var(--line-2);
-    border-radius: 3px;
-  }
+.kit-row{
+  position: relative;
+  padding-left: 0.8rem;
+}
+.kit-row::before{
+  content: "";
+  position: absolute; left: 0; top: 0.85rem;
+  width: 0.35rem; height: 1px;
+  background: var(--frame-hi);
+}
 
-  /* ------- entries (experience / education / orgs / courses) ------- */
-  .entry{
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 28px;
-    padding: 22px 0;
-    border-top: 1px dashed var(--line);
-  }
-  .entry:first-child{ border-top: none; padding-top: 0; }
-  .entry .when{
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--fg-dim);
-    letter-spacing: 0.04em;
-  }
-  .entry h3{
-    margin: 0 0 4px;
-    font-size: 18px;
-    font-weight: 500;
-    letter-spacing: -0.005em;
-  }
-  .entry h3 a:hover{ color: var(--accent); }
-  .entry .role{
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--accent);
-    margin-bottom: 10px;
-    letter-spacing: 0.04em;
-  }
-  .entry .where{ color: var(--fg-dim); font-size: 14px; margin-bottom: 8px; }
-  .entry p{ margin: 6px 0 0; color: var(--fg); font-size: 15px; }
-  .entry ul.bullets{
-    margin: 8px 0 0; padding-left: 0; list-style: none;
-  }
-  .entry ul.bullets li{
-    position: relative;
-    padding-left: 18px;
-    margin: 4px 0;
-    font-size: 15px;
-    color: var(--fg);
-  }
-  .entry ul.bullets li::before{
-    content: "—";
-    position: absolute; left: 0;
-    color: var(--accent);
-  }
-  @media (max-width: 640px){
-    .entry{ grid-template-columns: 1fr; gap: 6px; }
-  }
+/* ==========================================================================
+   7. CASE — technical dossier
+   ========================================================================== */
+.case{
+  border-color: var(--frame);
+  position: relative;
+}
+.case::after{
+  content: "";
+  position: absolute;
+  top: 0; right: 0;
+  width: 0; height: 0;
+  border-style: solid;
+  border-width: 0 0.55rem 0.55rem 0;
+  border-color: transparent transparent var(--frame) transparent;
+  pointer-events: none;
+}
+.case-kicker{ letter-spacing: 0.13em; }
+.case-field dt{ letter-spacing: 0.13em; }
+.case-field dt::before{ content: "▪ "; opacity: 0.6; }
 
-  /* ------- projects ------- */
-  .projects-grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 14px;
-  }
-  .project{
-    border: 1px solid var(--line);
-    background: var(--bg-2);
-    padding: 22px;
-    border-radius: 4px;
-    transition: all .2s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  .project::after{
-    content: "";
-    position: absolute; inset: 0;
-    background: linear-gradient(140deg, transparent 60%, rgba(255,90,31,0.08));
-    opacity: 0;
-    transition: opacity .25s ease;
-    pointer-events: none;
-  }
-  .project:hover{
-    border-color: var(--accent);
-    transform: translateY(-2px);
-  }
-  .project:hover::after{ opacity: 1; }
-  .project .head{
-    display: flex; justify-content: space-between; align-items: flex-start; gap: 10px;
-    margin-bottom: 8px;
-  }
-  .project h3{
-    margin: 0;
-    font-size: 17px;
-    font-weight: 500;
-    letter-spacing: -0.005em;
-  }
-  .project h3 a{ display: inline-flex; align-items: center; gap: 6px; }
-  .project h3 a:hover{ color: var(--accent); }
-  .project .lang{
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--fg-dim);
-    padding: 3px 7px;
-    border: 1px solid var(--line-2);
-    border-radius: 3px;
-    white-space: nowrap;
-  }
-  .project p{ margin: 6px 0 0; font-size: 14px; color: var(--fg-dim); }
-  .project .tags{
-    margin-top: 12px;
-    display: flex; flex-wrap: wrap; gap: 6px;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--muted);
-  }
-  .project .tags span::before{ content: "#"; color: var(--accent); }
+/* ==========================================================================
+   8. TEST POINT — HUD panel
+   ========================================================================== */
+.tp{ position: relative; border-color: var(--frame); }
+.tp-bar{ border-bottom: 1px solid var(--frame); }
 
-  /* ------- awards ------- */
-  .award-list{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 12px;
-  }
-  .award{
-    border: 1px solid var(--line);
-    padding: 16px 18px;
-    border-radius: 4px;
-    background: var(--bg-2);
-    transition: border-color .15s ease;
-  }
-  .award:hover{ border-color: var(--accent); }
-  .award h4{
-    margin: 0 0 4px;
-    font-size: 15px;
-    font-weight: 500;
-  }
-  .award .meta{
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--fg-dim);
-    letter-spacing: 0.04em;
-  }
+/* ==========================================================================
+   9. BAR — the command strip
+   ========================================================================== */
+.bar{ border-bottom: 1px solid var(--frame); }
+.bar-id .mark{
+  border-radius: 0;
+  width: 0.55rem; height: 0.55rem;
+  box-shadow: 0 0 0 2px rgba(217,94,98,0.18);
+}
+.bar-status .dot{ border-radius: 0; }
+.bar-nav a{ letter-spacing: 0.14em; }
 
-  .cert-list{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 10px;
-  }
-  .cert{
-    padding: 12px 14px;
-    border: 1px solid var(--line);
-    border-radius: 3px;
-    background: var(--bg-2);
-    font-size: 14px;
-    display: flex; align-items: center; gap: 10px;
-  }
-  .cert::before{
-    content: "✓";
-    color: var(--accent);
-    font-family: var(--mono);
-    font-weight: 700;
-  }
+/* ==========================================================================
+   10. FOOTER — the data plate
+   ========================================================================== */
+.foot{
+  border-top: 1px solid var(--frame);
+  position: relative;
+}
+.foot::before{
+  content: "";
+  position: absolute; left: var(--gutter); top: -1px;
+  width: 3rem; height: 1px;
+  background: var(--accent);
+}
 
-  /* ------- footer ------- */
-  footer{
-    margin-top: 40px;
-    padding: 28px 0 40px;
-    border-top: 1px solid var(--line);
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--fg-dim);
-    display: flex; justify-content: space-between; align-items: center; gap: 16px;
-    flex-wrap: wrap;
+/* ==========================================================================
+   11. reveal: industrial — a quick wipe, not a fade
+   ========================================================================== */
+.reveal-pending{
+  clip-path: inset(0 0 100% 0);
+  opacity: 1;
+  transform: none;
+}
+.reveal-pending.in{
+  clip-path: inset(0 0 0 0);
+  transition: clip-path .55s var(--ease);
+}
+@media (prefers-reduced-motion: reduce){
+  .reveal-pending, .reveal-pending.in{
+    clip-path: none !important; transition: none !important;
   }
-  footer .end{ color: var(--accent); }
+}
 
-  /* reveal animation */
-  .reveal{
-    opacity: 0;
-    transform: translateY(8px);
-    transition: opacity .6s ease, transform .6s ease;
-  }
-  .reveal.in{ opacity: 1; transform: none; }
+/* print */
+@media print{
+  .vgutter, .landing-top-strip, .barcode, .scan, .corner{ display: none !important; }
+  .plate, .case, .tp, .section .sec-bar{ border-color: #ccc !important; }
+}
 
-  @media (prefers-reduced-motion: reduce){
-    *{ animation: none !important; transition: none !important; }
-    .reveal{ opacity:1; transform:none; }
-  }
 </style>
 </head>
 <body>
 
-<!-- ============ TOPBAR (simple, no STATUS dot) ============ -->
-<div class="topbar">
-  <div class="topbar-inner">
-    <div class="brand">kenzie<b>.</b>nabeel</div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#experience">Experience</a>
-      <a href="#projects">Projects</a>
-      <a href="#education">Education</a>
+<a class="skip" href="#content">Skip to content</a>
+<div class="spot" id="spot" aria-hidden="true"></div>
+
+<!-- ================= TOP BAR ================= -->
+<header class="bar">
+  <div class="bar-in">
+    <a class="bar-id" href="#top">
+      <span class="mark" aria-hidden="true"></span>
+      g3ngi
+    </a>
+
+    <nav class="bar-nav" aria-label="Sections">
+      <a href="#top" data-nav="top">Home</a>
+      <a href="#work" data-nav="work">Work</a>
+      <a href="#awards" data-nav="awards">Awards</a>
+      <a href="#cases" data-nav="cases">Cases</a>
+      <a href="#record" data-nav="record">Record</a>
+      <a href="#kit" data-nav="kit">Kit</a>
+      <a href="#contact" data-nav="contact">Contact</a>
     </nav>
+
+    <div class="bar-status">
+      <span class="dot"></span>
+      <span>Available</span>
+    </div>
+
+    <button class="bar-menu" id="menuBtn" type="button" aria-expanded="false" aria-controls="sheet">
+      Index ☰
+    </button>
   </div>
+  <div class="bar-progress" id="barProgress" aria-hidden="true"></div>
+</header>
+
+<!-- mobile sheet -->
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Index">
+  <div class="sheet-top">
+    <span class="mono">Index</span>
+    <button class="bar-menu" id="closeBtn" type="button">Close ✕</button>
+  </div>
+  <ul>
+    <li><a href="#top">Home <span>01</span></a></li>
+    <li><a href="#work">Work <span>02</span></a></li>
+    <li><a href="#awards">Awards <span>03</span></a></li>
+    <li><a href="#cases">Cases <span>04</span></a></li>
+    <li><a href="#record">Record <span>05</span></a></li>
+    <li><a href="#kit">Kit <span>06</span></a></li>
+    <li><a href="#contact">Contact <span>07</span></a></li>
+  </ul>
 </div>
 
-<main>
+<div class="shell layout no-rail" id="layout">
 
-  <!-- ============ HERO / ABOUT ============ -->
-  <header class="hero reveal" id="about">
-    <div class="col-left">
-      <!--
-        PROFILE PIC:
-        To use your own photo, replace the <span class="initials">KN</span>
-        line below with an <img> tag, like this:
-            <img src="profile.jpg" alt="Kenzie Nabeel" />
-        Drop your photo as `profile.jpg` next to this index.html file.
-      -->
-      <div class="avatar" aria-label="Profile picture">
-        <span class="initials"></span>
-        <img src="images/pfp.png" alt="Kenzie Nabeel" />
-      </div>
-
-      <div class="meta">
-        <div><span>LOC</span> &nbsp;Jakarta, ID</div>
-        <div><span>EDU</span> &nbsp;BINUS Univ.</div>
-        <div><span>ROLE</span>&nbsp;Cyber Sec.</div>
-        <div><span>YEAR</span>&nbsp;2026</div>
-      </div>
+  <!-- ================= LANDING ================= -->
+  <section class="landing" id="top" aria-label="Introduction">
+    <div class="landing-top-strip" aria-hidden="true">
+      <span class="st-l">
+        <span class="barcode" aria-hidden="true">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </span>
+        <span>ID&nbsp;—&nbsp;G3NGI</span>
+      </span>
+      <span class="st-r">
+        <span class="jp" style="letter-spacing:.3em">稼働中</span>
+        <span>Jakarta 06°12′S 106°49′E</span>
+      </span>
     </div>
 
-    <div>
-      <h1>Kenzie Nabeel Rivanda</h1>
-      <div class="tagline">Reverse Engineering · IoT · Red Teaming</div>
-      <p class="intro">
-        Active Cyber Security undergraduate at BINUS University. I spend most of
-        my time pulling things apart to figure out how they really work —
-        binaries, embedded devices, and the soft underbelly of trust
-        assumptions in modern systems. Passionate about reverse engineering,
-        IoT engineering & security, and red team tradecraft.
+    <div class="vgutter left" aria-hidden="true">
+      <span>技術仕様</span>
+      <span><b>記録</b></span>
+      <span>二〇二六</span>
+    </div>
+    <div class="vgutter right" aria-hidden="true">
+      <span>セキュリティ・エンジニア</span>
+      <span>逆解析</span>
+    </div>
+    <div class="landing-copy">
+      <h1 class="landing-name">
+        <span>Kenzie</span>
+        <span>Nabeel</span>
+        <span>Rivanda</span>
+      </h1>
+
+      <div class="landing-rule" aria-hidden="true"></div>
+
+      <p class="landing-slogan">
+        I take systems apart to find <em>where trust breaks</em>, then write it up
+        so someone else can use it.
       </p>
-      <div class="links">
-        <a class="btn" href="https://github.com/g3ngi" target="_blank" rel="noopener">
-          GitHub <span class="arrow">↗</span>
+
+      <p class="landing-meta">
+        <span>Security engineer</span>
+        <span><b>Jakarta</b></span>
+        <span><b>BINUS</b> 2026</span>
+      </p>
+
+      <div class="landing-cta">
+        <a class="btn" href="#work">Enter <span class="ar" aria-hidden="true">↓</span></a>
+        <a class="landing-scroll" href="mailto:kenzienabeel@gmail.com">Email</a>
+        <a class="landing-scroll" href="https://github.com/g3ngi" target="_blank" rel="noopener">GitHub ↗</a>
+        <a class="landing-scroll" href="https://www.linkedin.com/in/kenzie-nabeel/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+
+    <figure class="landing-photo">
+      <span class="corner tl" aria-hidden="true"></span>
+      <span class="corner tr" aria-hidden="true"></span>
+      <span class="corner bl" aria-hidden="true"></span>
+      <span class="corner br" aria-hidden="true"></span>
+      <span class="scan" aria-hidden="true"></span>
+      <picture>
+        <source srcset="images/pfp.webp" type="image/webp" />
+        <img src="images/pfp.png" alt="Kenzie Nabeel Rivanda" width="320" height="320" />
+      </picture>
+      <figcaption class="ph-tag"><b>Fig 01</b> — operator</figcaption>
+    </figure>
+  </section>
+
+  <!-- ================= CONTENT ================= -->
+  <main class="content" id="content">
+
+    <!-- WORK -->
+    <section class="section" id="work">
+      <div class="sec-bar">
+        <span class="sec-num">01</span>
+        <h2 class="sec-title">Work</h2>
+        <span class="sec-fill"></span>
+        <span class="sec-jp jp" aria-hidden="true">経歴</span>
+      </div>
+
+      <div class="panel panel--notch plate reveal">
+        <div class="panel-body">
+          <article class="entry">
+            <div class="entry-top">
+              <span class="entry-when">Feb 2025 — Feb 2026</span>
+              <span class="entry-place">Jakarta, ID</span>
+            </div>
+            <h3 class="entry-title">Penetration Tester Intern</h3>
+            <p class="entry-org">
+              <a href="https://itsec.asia/" target="_blank" rel="noopener">ITSEC Asia</a>
+            </p>
+            <ul class="entry-points">
+              <li>Web, mobile and API pentesting across finance and fintech engagements.</li>
+              <li>Reverse engineered obfuscated Android apps — API encryption, logic flow, key recovery.</li>
+              <li>OT red teaming: malware and payload development in OT environments.</li>
+            </ul>
+          </article>
+
+          <article class="entry">
+            <div class="entry-top">
+              <span class="entry-when">2023 — present</span>
+              <span class="entry-place">BINUS</span>
+            </div>
+            <h3 class="entry-title">CTF Player &amp; Challenge Author</h3>
+            <p class="entry-org">
+              <a href="https://petirsec.org/" target="_blank" rel="noopener">PETIR Cyber Security</a>
+            </p>
+            <ul class="entry-points">
+              <li>Reverse engineering and hardware categories, national and international.</li>
+              <li>Authored 10+ reverse engineering challenges across 3+ competitions.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- AWARDS -->
+    <section class="section" id="awards">
+      <div class="sec-bar">
+        <span class="sec-num">02</span>
+        <h2 class="sec-title">Awards</h2>
+        <span class="sec-fill"></span>
+        <span class="sec-jp jp" aria-hidden="true">受賞</span>
+      </div>
+
+      <div class="panel plate reveal">
+        <div class="panel-body">
+          <ul class="ledger">
+            <li class="ledger-item first">
+              <span class="ledger-rank">1st</span>
+              <span>
+                <span class="ledger-name">Hack The City CTF</span>
+                <span class="ledger-org">SATSIBER TNI</span>
+              </span>
+              <span class="ledger-when">Sep 2025</span>
+            </li>
+            <li class="ledger-item first">
+              <span class="ledger-rank">1st</span>
+              <span>
+                <span class="ledger-name">Joints CTF</span>
+                <span class="ledger-org">Universitas Gadjah Mada</span>
+              </span>
+              <span class="ledger-when">May 2023</span>
+            </li>
+            <li class="ledger-item">
+              <span class="ledger-rank">2nd</span>
+              <span>
+                <span class="ledger-name">Gemastik XVIII — Keamanan Siber</span>
+                <span class="ledger-org">Ditmawa</span>
+              </span>
+              <span class="ledger-when">Oct 2025</span>
+            </li>
+            <li class="ledger-item">
+              <span class="ledger-rank">3rd</span>
+              <span>
+                <span class="ledger-name">Wreck-IT CTF</span>
+                <span class="ledger-org">Politeknik Sandi Siber Negara</span>
+              </span>
+              <span class="ledger-when">May 2023</span>
+            </li>
+            <li class="ledger-item">
+              <span class="ledger-rank">10+</span>
+              <span>
+                <span class="ledger-name">CTF challenges authored</span>
+                <span class="ledger-org">Reverse engineering category</span>
+              </span>
+              <span class="ledger-when">Ongoing</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASES -->
+    <section class="section" id="cases">
+      <div class="sec-bar">
+        <span class="sec-num">03</span>
+        <h2 class="sec-title">Cases</h2>
+        <span class="sec-fill"></span>
+        <span class="sec-jp jp" aria-hidden="true">案件</span>
+      </div>
+
+      <div class="case reveal" data-open="true">
+        <button class="case-btn" type="button" aria-expanded="true" aria-controls="case-1">
+          <div class="case-kicker">
+            <span class="case-id">001</span>
+            <span>Python · Windows x86-64</span>
+            <span class="case-status">shipped</span>
+          </div>
+          <h3 class="case-name">Anti-RE <span class="case-mark" aria-hidden="true">+</span></h3>
+          <p class="case-dek">
+            A catalogue of anti reverse-engineering techniques — anti-debug, anti-VM
+            and runtime integrity checks — built to see evasive payloads from both
+            sides of the debugger.
+          </p>
+        </button>
+
+        <div class="case-body" id="case-1">
+          <dl>
+            <div class="case-field">
+              <dt>Target</dt>
+              <dd>Windows PE binaries, x86-64. A reference implementation rather than a single payload.</dd>
+            </div>
+            <div class="case-field">
+              <dt>Vector</dt>
+              <dd>
+                <ul>
+                  <li>Anti-debug via <code>PEB.BeingDebugged</code>, <code>NtQueryInformationProcess</code>, hardware breakpoint registers.</li>
+                  <li>Anti-VM through CPUID hypervisor bits, registry artefacts and timing skew.</li>
+                  <li>Runtime integrity: checksumming its own <code>.text</code> section to catch patches.</li>
+                </ul>
+              </dd>
+            </div>
+            <div class="case-field">
+              <dt>Why</dt>
+              <dd>Each check abuses an assumption the analyst makes — that the debugger is invisible, that a VM looks like bare metal, that the mapped image equals the file on disk. Break one and the payload branches to a decoy path.</dd>
+            </div>
+            <div class="case-field">
+              <dt>Measured</dt>
+              <dd>
+                <table class="matrix">
+                  <thead>
+                    <tr><th scope="col">Technique</th><th scope="col">x64dbg</th><th scope="col">Frida</th><th scope="col">Note</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td>PEB.BeingDebugged</td><td class="mk n">✕ caught</td><td class="mk n">✕</td><td>trivial to bypass</td></tr>
+                    <tr><td>NtQueryInformationProcess</td><td class="mk n">✕ caught</td><td class="mk p">~</td><td>needs hooking</td></tr>
+                    <tr><td>Hardware breakpoints</td><td class="mk y">✓ holds</td><td class="mk p">~</td><td>most reliable</td></tr>
+                    <tr><td>Text-section checksum</td><td class="mk y">✓ holds</td><td class="mk y">✓</td><td>catches patches</td></tr>
+                  </tbody>
+                </table>
+              </dd>
+            </div>
+            <div class="case-field">
+              <dt>Outcome</dt>
+              <dd>Hardened red team payloads against the same tooling used to analyse them.</dd>
+            </div>
+          </dl>
+          <div class="case-foot">
+            <a class="case-link" href="https://github.com/g3ngi/Anti-RE" target="_blank" rel="noopener">Source ↗<span class="sr-only"> (opens in a new tab)</span></a>
+            <span class="case-tags">
+              <span class="tag">reverse-engineering</span><span class="tag">evasion</span><span class="tag">windows</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="case reveal" data-open="false">
+        <button class="case-btn" type="button" aria-expanded="false" aria-controls="case-2">
+          <div class="case-kicker">
+            <span class="case-id">002</span>
+            <span>Swift · macOS</span>
+            <span class="case-status live">in progress</span>
+          </div>
+          <h3 class="case-name">NoTrust Agent <span class="case-mark" aria-hidden="true">+</span></h3>
+          <p class="case-dek">
+            Zero-trust posture agent for macOS. Continuous attestation and conditional
+            access, built to test the claim that a managed endpoint is trustworthy by default.
+          </p>
+        </button>
+
+        <div class="case-body" id="case-2" hidden>
+          <dl>
+            <div class="case-field">
+              <dt>Target</dt>
+              <dd>macOS endpoints. The companion gadget targets iOS; both assume the device may already be compromised.</dd>
+            </div>
+            <div class="case-field">
+              <dt>Model</dt>
+              <dd>
+                <ul>
+                  <li>Post-compromise persistence: signing state, launch agents and daemons, TCC grants.</li>
+                  <li>Integrity drift: SIP status, unsigned kernel extensions, modified system binaries.</li>
+                  <li>Trust boundary failure: a device that passes one check once, then drifts.</li>
+                </ul>
+              </dd>
+            </div>
+            <div class="case-field">
+              <dt>Approach</dt>
+              <dd>Continuous evidence over point-in-time scoring. Signals are re-collected on an interval and aggregated into a verdict that gates access — not a single enrolment check.</dd>
+            </div>
+            <div class="case-field">
+              <dt>Open</dt>
+              <dd>An agent cannot be trusted to police its own host — a compromised one can lie. The fix is remote attestation, which is the part still unsolved.</dd>
+            </div>
+          </dl>
+          <div class="case-foot">
+            <a class="case-link" href="https://github.com/g3ngi/NoTrust_Agent" target="_blank" rel="noopener">Agent ↗<span class="sr-only"> (opens in a new tab)</span></a>
+            <a class="case-link" href="https://github.com/g3ngi/NoTrust_Gadget" target="_blank" rel="noopener">Gadget ↗<span class="sr-only"> (opens in a new tab)</span></a>
+            <span class="case-tags">
+              <span class="tag">zero-trust</span><span class="tag">macos</span><span class="tag">swift</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REPOS -->
+    <section class="section">
+      <div class="sec-bar">
+        <span class="sec-num">04</span>
+        <h2 class="sec-title">Also built</h2>
+        <span class="sec-fill"></span>
+        <span class="sec-jp jp" aria-hidden="true">技術</span>
+      </div>
+
+      <div class="repos reveal">
+        <a class="repo" href="https://github.com/g3ngi/AI-Hoshino-Bot" target="_blank" rel="noopener">
+          <span class="repo-top">
+            <span class="repo-name">AI-Hoshino-Bot</span>
+            <span class="repo-lang">Python</span>
+          </span>
+          <p class="repo-note">Flags malicious URLs in Discord chat.</p>
         </a>
-        <a class="btn" href="https://www.linkedin.com/in/kenzie-nabeel/" target="_blank" rel="noopener">
-          LinkedIn <span class="arrow">↗</span>
+        <a class="repo" href="https://github.com/g3ngi/NoTrust_Gadget" target="_blank" rel="noopener">
+          <span class="repo-top">
+            <span class="repo-name">NoTrust_Gadget</span>
+            <span class="repo-lang">Swift</span>
+          </span>
+          <p class="repo-note">iOS posture checks.</p>
         </a>
-        <a class="btn" href="mailto:your.email@example.com">
-          Contact <span class="arrow">↗</span>
+        <a class="repo" href="https://github.com/g3ngi/ctf-challs" target="_blank" rel="noopener">
+          <span class="repo-top">
+            <span class="repo-name">ctf-challs</span>
+            <span class="repo-lang">Java</span>
+          </span>
+          <p class="repo-note">Authored CTF challenges, RE and binary.</p>
+        </a>
+        <a class="repo" href="https://github.com/g3ngi/EDIV-LCA" target="_blank" rel="noopener">
+          <span class="repo-top">
+            <span class="repo-name">EDIV-LCA</span>
+            <span class="repo-lang">Research</span>
+          </span>
+          <p class="repo-note">Master's thesis: life-cycle assessment.</p>
+        </a>
+        <a class="repo" href="https://github.com/g3ngi/wazuh_contribute" target="_blank" rel="noopener">
+          <span class="repo-top">
+            <span class="repo-name">wazuh_contribute</span>
+            <span class="repo-lang">★ 1</span>
+          </span>
+          <p class="repo-note">Contributions to Wazuh.</p>
+        </a>
+        <a class="repo" href="https://github.com/g3ngi?tab=repositories" target="_blank" rel="noopener">
+          <span class="repo-top">
+            <span class="repo-name">all 32 repositories</span>
+            <span class="repo-lang">12 langs</span>
+          </span>
+          <p class="repo-note">Go, Rust, Solidity, Jupyter, and the rest.</p>
         </a>
       </div>
-    </div>
-  </header>
+    </section>
 
-  <!-- ============ SKILLS ============ -->
-  <section id="skills" class="reveal">
-    <div class="section-head">
-      <div class="num">§ 01 / SKILLS</div>
-      <!-- <h2>Tools of the <em>trade</em></h2> -->
-    </div>
+    <!-- RECORD -->
+    <section class="section" id="record">
+      <div class="sec-bar">
+        <span class="sec-num">05</span>
+        <h2 class="sec-title">Record</h2>
+        <span class="sec-fill"></span>
+        <span class="sec-jp jp" aria-hidden="true">学歴</span>
+      </div>
 
-    <div class="skills-grid">
-      <div class="skill-cat">
-        <h3>Languages</h3>
-        <ul>
-          <li>Python</li><li>Java</li><li>Swift</li>
-          <li>C / C++</li><li>JavaScript</li><li>Bash</li>
-        </ul>
-      </div>
-      <div class="skill-cat">
-        <h3>Reverse Engineering</h3>
-        <ul>
-          <li>Ghidra</li><li>IDA Pro</li><li>x64dbg</li>
-          <li>radare2</li><li>GDB</li><li>Frida</li>
-        </ul>
-      </div>
-      <div class="skill-cat">
-        <h3>Red Team / Pentesting</h3>
-        <ul>
-          <li>Burp Suite</li><li>Metasploit</li><li>Nmap</li>
-          <li>Cobalt Strike</li><li>SQLMap</li><li>Kali Linux</li>
-        </ul>
-      </div>
-      <div class="skill-cat">
-        <h3>IoT / Hardware</h3>
-        <ul>
-          <li>ESP32 / Arduino</li>
-          <li>UART / JTAG</li>
-          <li>Firmware Extraction</li>
-          <li>PlatformIO</li>
-        </ul>
-      </div>
-      <div class="skill-cat">
-        <h3>Web &amp; App Sec</h3>
-        <ul>
-          <li>OWASP Top 10</li><li>JADX</li><li>MobSF</li>
-          <li>Postman</li><li>Wireshark</li>
-        </ul>
-      </div>
-      <div class="skill-cat">
-        <h3>Dev &amp; Infra</h3>
-        <ul>
-          <li>Git / GitHub</li>
-          <li>Docker</li>
-          <li>Linux</li>
-          <li>CI/CD</li>
-        </ul>
-      </div>
-      <div class="skill-cat">
-        <h3>AI / ML</h3>
-        <ul>
-          <li>PyTorch</li><li>scikit-learn</li><li>TensorFlow</li>
-          <li>Hugging Face</li>
-        </ul>
-      </div>
-      <div class="skill-cat">
-        <h3>Languages (spoken)</h3>
-        <ul>
-          <li>Indonesian (Native)</li><li>English (Professional)</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+      <div class="panel plate reveal">
+        <div class="panel-body">
+          <article class="entry">
+            <div class="entry-top">
+              <span class="entry-when">Jul 2022 — Aug 2026</span>
+              <span class="entry-place">Jakarta</span>
+            </div>
+            <h3 class="entry-title">BSc, Cyber Security</h3>
+            <p class="entry-org">
+              <a href="https://socs.binus.ac.id/cyber-security/" target="_blank" rel="noopener">Bina Nusantara University</a>
+            </p>
+            <ul class="entry-points">
+              <li>Reverse Engineering · Binary Exploitation · Mobile Pentesting · Software Security.</li>
+            </ul>
+          </article>
 
-  <!-- ============ EXPERIENCE ============ -->
-  <section id="experience" class="reveal">
-    <div class="section-head">
-      <div class="num">§ 02 / EXPERIENCE</div>
-      <!-- <h2>Where I've <em>operated</em></h2> -->
-    </div>
+          <article class="entry">
+            <div class="entry-top">
+              <span class="entry-when">2025 — 2027</span>
+              <span class="entry-place">Jakarta</span>
+            </div>
+            <h3 class="entry-title">MSc, Computer Science</h3>
+            <p class="entry-org">Bina Nusantara University · fast track</p>
+            <ul class="entry-points">
+              <li>Thesis project: <a href="https://github.com/g3ngi/EDIV-LCA" target="_blank" rel="noopener">EDIV-LCA</a> — life-cycle assessment tooling.</li>
+            </ul>
+          </article>
 
-    <!-- TODO: Replace with your actual experience from LinkedIn -->
-    <div class="entry">
-      <div class="when">FEB 2025 — FEB 2026<br/>Jakarta, ID</div>
-      <div>
-        <h3>Penetration Tester Intern</h3>
-        <div class="role">ITSEC Asia</div>
-        <ul class="bullets">
-          <li>Delivering offensive security services throughout penetration testing in web
-applications, mobile applications (Android app, EKYC feature) & API.</li>
-          <li>Creating a technical report for the vulnerability finding explanation and recommended remediation from specific technology stack that complies to theinformation security standard frameworks.</li>
-          <li>Assisting the bfuscated apps, understanding API encryption and application logic flow, finding keyclient in providing various security solutions.</li>
-          <li>Assisting in reverse engineering mobile apps (obfuscated apps, understanding API encryption and application logic flow, finding keys).</li>
-          <li>Assisting in OT Red Teaming scenarios, malware & payload development in OT environment.</li>
-        </ul>
-      </div>
-    </div>
+          <article class="entry">
+            <div class="entry-top">
+              <span class="entry-when">2023 — present</span>
+              <span class="entry-place">BINUS</span>
+            </div>
+            <h3 class="entry-title">PETIR Cyber Security</h3>
+            <p class="entry-org">Team member</p>
+            <ul class="entry-points">
+              <li>CTF team. Reverse engineering and hardware.</li>
+            </ul>
+          </article>
 
-  <!-- ============ PROJECTS ============ -->
-  <section id="projects" class="reveal">
-    <div class="section-head">
-      <div class="num">§ 03 / PROJECTS</div>
-      <!-- <h2>Selected <em>work</em></h2> -->
-    </div>
-
-    <div class="projects-grid">
-
-      <article class="project">
-        <div class="head">
-          <h3><a href="https://github.com/g3ngi/Anti-RE" target="_blank" rel="noopener">Anti-RE <span class="arrow">↗</span></a></h3>
-          <span class="lang">Python</span>
+          <article class="entry">
+            <div class="entry-top">
+              <span class="entry-when">2022 — 2025</span>
+              <span class="entry-place">Jakarta</span>
+            </div>
+            <h3 class="entry-title">UKM Band BINUS</h3>
+            <p class="entry-org">President, Kemanggisan region</p>
+            <ul class="entry-points">
+              <li>Led the Kemanggisan chapter.</li>
+            </ul>
+          </article>
         </div>
-        <p>A collection of anti reverse-engineering techniques — anti-debug, anti-VM, and runtime integrity checks intended for research and red team payload hardening.</p>
-        <div class="tags"><span>reverse-engineering</span><span>evasion</span></div>
-      </article>
+      </div>
+    </section>
 
-      <article class="project">
-        <div class="head">
-          <h3><a href="https://github.com/g3ngi/NoTrust_Agent" target="_blank" rel="noopener">NoTrust Agent <span class="arrow">↗</span></a></h3>
-          <span class="lang">Swift</span>
+    <!-- KIT -->
+    <section class="section" id="kit">
+      <div class="sec-bar">
+        <span class="sec-num">06</span>
+        <h2 class="sec-title">Kit</h2>
+        <span class="sec-fill"></span>
+        <span class="sec-jp jp" aria-hidden="true">装備</span>
+      </div>
+
+      <div class="kit plate reveal">
+        <div class="kit-row">
+          <p class="kit-group">Languages</p>
+          <p class="kit-items"><span>Python</span> <span>Java</span> <span>Swift</span> <span>C / C++</span> <span>JavaScript</span> <span>Bash</span> <span>Go</span> <span>Rust</span></p>
         </div>
-        <p>Zero-trust security agent implementation targeting the Apple macOS environment. Continuously verifies device posture and enforces conditional access.</p>
-        <div class="tags"><span>zero-trust</span><span>macos</span><span>swift</span></div>
-      </article>
-
-      <article class="project">
-        <div class="head">
-          <h3><a href="https://github.com/g3ngi/NoTrust_Gadget" target="_blank" rel="noopener">NoTrust Gadget <span class="arrow">↗</span></a></h3>
-          <span class="lang">Swift</span>
+        <div class="kit-row">
+          <p class="kit-group">Reverse eng.</p>
+          <p class="kit-items"><span>Ghidra</span> <span>IDA Pro</span> <span>x64dbg</span> <span>radare2</span> <span>GDB</span> <span>Frida</span></p>
         </div>
-        <p>iOS counterpart to NoTrust Agent — zero-trust posture checks and policy enforcement on Apple mobile devices.</p>
-        <div class="tags"><span>zero-trust</span><span>ios</span></div>
-      </article>
-
-      <article class="project">
-        <div class="head">
-          <h3><a href="https://github.com/g3ngi/AI-Hoshino-Bot" target="_blank" rel="noopener">AI Hoshino Bot <span class="arrow">↗</span></a></h3>
-          <span class="lang">Python</span>
+        <div class="kit-row">
+          <p class="kit-group">Red team</p>
+          <p class="kit-items"><span>Burp Suite</span> <span>Metasploit</span> <span>Nmap</span> <span>Cobalt Strike</span> <span>SQLMap</span> <span>Kali</span></p>
         </div>
-        <p>Discord bot that uses a deep learning model to flag malicious URLs posted in chat in real time — built to protect community servers from phishing.</p>
-        <div class="tags"><span>ml-security</span><span>phishing</span><span>discord</span></div>
-      </article>
-
-      <article class="project">
-        <div class="head">
-          <h3><a href="https://github.com/g3ngi/ctf-challs" target="_blank" rel="noopener">CTF Challenges <span class="arrow">↗</span></a></h3>
-          <span class="lang">Java</span>
+        <div class="kit-row">
+          <p class="kit-group">IoT / hardware</p>
+          <p class="kit-items"><span>ESP32 / Arduino</span> <span>UART / JTAG</span> <span>firmware extraction</span> <span>PlatformIO</span></p>
         </div>
-        <p>Author-side repository for CTF challenges I've designed across reverse engineering, web exploitation, and binary categories.</p>
-        <div class="tags"><span>ctf</span><span>author</span></div>
-      </article>
-
-      <article class="project">
-        <div class="head">
-          <h3><a href="https://github.com/g3ngi" target="_blank" rel="noopener">See all 31 repos <span class="arrow">↗</span></a></h3>
-          <span class="lang">github</span>
+        <div class="kit-row">
+          <p class="kit-group">Web &amp; app</p>
+          <p class="kit-items"><span>OWASP Top 10</span> <span>JADX</span> <span>MobSF</span> <span>Postman</span> <span>Wireshark</span></p>
         </div>
-        <p>More tooling, write-ups, and research lives on my GitHub — including PETIRsec contributions.</p>
-        <div class="tags"><span>more</span></div>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- ============ EDUCATION ============ -->
-  <section id="education" class="reveal">
-    <div class="section-head">
-      <div class="num">§ 04 / EDUCATION</div>
-      <!-- <h2>Formal <em>training</em></h2> -->
-    </div>
-
-    <div class="entry">
-      <div class="when">2022 — 2026<br/>Jakarta, ID</div>
-      <div>
-        <h3>Bina Nusantara University (BINUS)</h3>
-        <div class="role">Undergraduate in Cyber Security, Computer Science</div>
-        <ul class="bullets">
-          <li>Relevant coursework: Reverse Engineering, Binary Exploitation, Network &amp; Mobile Pentesting, Secure Programming, Software Security.</li>
-          <li>[Add GPA, leadership roles, or notable coursework here.]</li>
-        </ul>
+        <div class="kit-row">
+          <p class="kit-group">Dev &amp; infra</p>
+          <p class="kit-items"><span>Git / GitHub</span> <span>Docker</span> <span>Linux</span> <span>CI / CD</span> <span>Node-RED</span> <span>MQTT</span></p>
+        </div>
+        <div class="kit-row">
+          <p class="kit-group">AI / ML</p>
+          <p class="kit-items"><span>PyTorch</span> <span>scikit-learn</span> <span>TensorFlow</span> <span>Hugging Face</span> <span>YOLO</span></p>
+        </div>
+        <div class="kit-row">
+          <p class="kit-group">Spoken</p>
+          <p class="kit-items"><span>Indonesian (native)</span> <span>English (professional)</span></p>
+        </div>
       </div>
-    </div>
 
-    <div class="entry">
-      <div class="when">2025 — 2027<br/>Jakarta, ID</div>
-      <div>
-        <h3>Bina Nusantara University (BINUS)</h3>
-        <div class="role">Master of Computer Science (Fast Track)</div>
-        <ul class="bullets">
-          <li>Relevant coursework: Reverse Engineering, Binary Exploitation, Network &amp; Mobile Pentesting, Secure Programming, Software Security.</li>
-          <li>[Add GPA, leadership roles, or notable coursework here.]</li>
-        </ul>
+      <div class="certs reveal">
+        <div class="cert">
+          <p class="cert-name">Certified AppSec Practitioner</p>
+          <p class="cert-issuer">The SecOps Group</p>
+        </div>
+        <div class="cert">
+          <p class="cert-name">ROCm Star Application Developer</p>
+          <p class="cert-issuer">AMD</p>
+        </div>
+        <div class="cert">
+          <p class="cert-name">JavaScript Backend Scholarship</p>
+          <p class="cert-issuer">DBS Foundation · 2023</p>
+        </div>
+        <div class="cert">
+          <p class="cert-name">Deep Learning Workshop</p>
+          <p class="cert-issuer">NVIDIA DLI</p>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-
-
-  <!-- ============ ORGANIZATIONS ============ -->
-  <section id="organizations" class="reveal">
-    <div class="section-head">
-      <div class="num">§ 05 / ORGANIZATIONS</div>
-      <!-- <h2>Crews &amp; <em>collectives</em></h2> -->
-    </div>
-
-    <div class="entry">
-      <div class="when">2023 — Present</div>
-      <div>
-        <h3><a href="https://petirsec.org/" target="_blank" rel="noopener">PETIR Cyber Security ↗</a></h3>
-        <div class="role">Team Member </div>
-        <ul class="bullets">
-          <li>Represented BINUS University in national and international CTF competitions.</li>
-          <li>Specialized in Reverse Engineering and Hardware categories.</li>
-          <li>Developed 10+ CTF Challenges accross 3+ competitions (Reverse engineering)</li>
-        </ul>
+    <!-- TEST POINT -->
+    <section class="section">
+      <div class="sec-bar">
+        <span class="sec-num">07</span>
+        <h2 class="sec-title">Test point</h2>
+        <span class="sec-fill"></span>
+        <span class="sec-jp jp" aria-hidden="true">試験</span>
       </div>
-    </div>
 
-    <div class="entry">
-      <div class="when">2022 — 2025</div>
-      <div>
-        <h3><a href="" target="_blank" rel="noopener">UKM Band Binus ↗</a></h3>
-        <div class="role">President of Kemanggisan Region </div>
-        <ul class="bullets">
-        </ul>
+      <div class="tp plate reveal">
+        <div class="tp-bar">
+          <span><span class="tp-id">TP-01</span> · find any input this accepts</span>
+          <span id="tpTries">attempt 1</span>
+        </div>
+        <div class="tp-in">
+<pre class="tp-code" aria-label="Challenge source"><span class="c">// true for one shape of input</span>
+<span class="k">function</span> check(s) &#123;
+  <span class="k">let</span> h = <span class="n">0x2f</span>;
+  <span class="k">for</span> (<span class="k">const</span> c <span class="k">of</span> s) h ^= c.charCodeAt(<span class="n">0</span>);
+  <span class="k">return</span> h === <span class="n">0</span> &amp;&amp; s.length === <span class="n">4</span>;
+&#125;</pre>
+          <form class="tp-form" id="tpForm" novalidate>
+            <label class="sr-only" for="tpInput">Your answer</label>
+            <input id="tpInput" type="text" autocomplete="off" autocapitalize="off"
+                   spellcheck="false" maxlength="64" placeholder="input string…" />
+            <button type="submit">Test</button>
+          </form>
+          <p class="tp-out" id="tpOut" role="status" aria-live="polite"></p>
+          <details class="tp-sol">
+            <summary>Solution</summary>
+            <p>
+              The accumulator starts at <code>0x2f</code> and XORs every byte, so you
+              need <code>b1 ^ b2 ^ b3 ^ b4 === 0x2f</code>. Pick any three bytes and the
+              fourth is forced: for <code>abc</code> it is
+              <code>0x2f ^ 0x61 ^ 0x62 ^ 0x63 = 0x4f</code> — the character
+              <code>O</code>, so <code>abcO</code> passes.
+            </p>
+          </details>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ============ AWARDS ============ -->
-  <section id="awards" class="reveal">
-    <div class="section-head">
-      <div class="num">§ 06 / AWARDS</div>
-      <!-- <h2>Competitions &amp; <em>recognition</em></h2> -->
-    </div>
-
-    <!-- TODO: Replace placeholders with your actual CTF / hackathon placings -->
-    <div class="award-list">
-      <div class="award">
-        <h4>1st Place Hack The City CTF</h4>
-        <div class="meta">SATSIBER TNI · SEP 2025</div>
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="contact plate reveal">
+        <div class="contact-in">
+          <h2 class="contact-line">Let's <span class="cut">talk</span>.</h2>
+          <p class="contact-sub">
+            Email is fastest.
+          </p>
+          <div class="contact-links">
+            <a class="primary" href="mailto:kenzienabeel@gmail.com?subject=Hello%20Kenzie">kenzienabeel@gmail.com</a>
+            <a href="#" id="copyMail">Copy</a>
+            <a href="https://github.com/g3ngi" target="_blank" rel="noopener">GitHub ↗</a>
+            <a href="https://www.linkedin.com/in/kenzie-nabeel/" target="_blank" rel="noopener">LinkedIn ↗</a>
+          </div>
+          <p class="copy-note" id="copyNote" role="status" aria-live="polite"></p>
+        </div>
       </div>
-      <div class="award">
-        <h4>1st Place Joints CTF</h4>
-        <div class="meta">Universitas Gadjah Mada · MAY 2023</div>
-      </div>
-      <div class="award">
-        <h4>2nd Place Gemastik XVIII - Keamanan Siber</h4>
-        <div class="meta">Ditmawa · OCT 2025</div>
-      </div>
-      <div class="award">
-        <h4>3rd Place Wreck-IT CTF</h4>
-        <div class="meta">Politenik Sandi Siber Negara · MAY 2023</div>
-      </div>
-    </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ============ CERTIFICATES ============ -->
-  <section id="certificates" class="reveal">
-    <div class="section-head">
-      <div class="num">§ 07 / CERTIFICATES</div>
-      <!-- <h2>Credentials <em>earned</em></h2> -->
-    </div>
+  </main>
+</div>
 
-    <!-- TODO: Replace with your actual certifications -->
-    <div class="cert-list">
-      <div class="cert">Certified AppSec Practitioner (CAP)</div>
-    </div>
-    <div class="cert-list">
-      <div class="cert">AMD ROCm Star Application Developer Certificate </div>
-    </div>
-  </section>
-
-  <!-- ============ COURSES ============ -->
-  <section id="courses" class="reveal">
-    <div class="section-head">
-      <div class="num">§ 08 / COURSES</div>
-    </div>
-
-    <!-- TODO: Add courses / bootcamps / scholarships you've completed -->
-    <div class="entry">
-      <div class="when">Mar 2023 - Jul 2023</div>
-      <div>
-        <h3>Javascript Backend Scholarship</h3>
-        <div class="role">DBS Foundation Coding Camp</div>
-        <p>Fundamentals of Javascript usage, Algorithms, Data Structure and Node.js</p>
-      </div>
-    </div>
-
-    <div class="entry">
-      <div class="when">MMM YYYY — MMM YYYY</div>
-      <div>
-        <h3>NVIDIA Deep Learning Workshop</h3>
-        <div class="role">NVIDIA Deep Learning Institute</div>
-        <p>Fundamentals of neural networks and CUDA-based GPU acceleration for deep learning workloads.</p>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div>© <span id="year">2026</span> All rights reserved.</div>
-    <div class="end">// END_OF_FILE</div>
-  </footer>
-
-</main>
+<footer class="foot">
+  <span>Kenzie Nabeel Rivanda · Jakarta</span>
+  <span class="jp" style="letter-spacing:.24em;color:var(--jp)" aria-hidden="true">終</span>
+  <span>Hand-written · no framework</span>
+</footer>
 
 <script>
-  // year
-  document.getElementById('year').textContent = new Date().getFullYear();
+(function () {
+  "use strict";
 
-  // reveal on scroll
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in');
-        io.unobserve(e.target);
-      }
+  var revealEls = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+
+  function revealAll() {
+    revealEls.forEach(function (el) {
+      el.classList.remove("reveal-pending");
+      el.classList.add("in");
     });
-  }, { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-</script>
+  }
+  window.addEventListener("error", revealAll);
 
+  try {
+    var yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+    var reduced = false;
+    try { reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+
+    var pending = [];
+    var vh0 = window.innerHeight || 800;
+    revealEls.forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (reduced || (r.bottom > 0 && r.top < vh0 * 0.95)) el.classList.add("in");
+      else { el.classList.add("reveal-pending"); pending.push(el); }
+    });
+
+    function checkReveal() {
+      if (!pending.length) return;
+      var vh = window.innerHeight || 800, keep = [];
+      pending.forEach(function (el) {
+        var r = el.getBoundingClientRect();
+        if (r.bottom > 0 && r.top < vh * 0.94) {
+          el.classList.remove("reveal-pending");
+          el.classList.add("in");
+        } else keep.push(el);
+      });
+      pending = keep;
+    }
+
+    /* nav + progress */
+    var navLinks = Array.prototype.slice.call(document.querySelectorAll("[data-nav]"));
+    var sections = Array.prototype.slice.call(document.querySelectorAll("section[id]"));
+    var barProgress = document.getElementById("barProgress");
+
+    function onScroll() {
+      var y = window.scrollY || 0;
+      var vh = window.innerHeight;
+      var max = document.documentElement.scrollHeight - vh;
+      if (barProgress) barProgress.style.width = (max > 0 ? Math.min(1, y / max) * 100 : 0) + "%";
+
+      var line = y + vh * 0.32;
+      var cur = null;
+      sections.forEach(function (s) { if (s.offsetTop <= line) cur = s.id; });
+      navLinks.forEach(function (a) {
+        if (a.dataset.nav === cur) a.setAttribute("aria-current", "true");
+        else a.removeAttribute("aria-current");
+      });
+      checkReveal();
+    }
+
+    var sched = false;
+    function schedule() {
+      if (sched) return;
+      sched = true;
+      var done = false;
+      function run() { if (done) return; done = true; sched = false; onScroll(); }
+      if (window.requestAnimationFrame) window.requestAnimationFrame(run);
+      window.setTimeout(run, 120);
+    }
+
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    window.addEventListener("load", onScroll);
+    [0, 120, 350, 800].forEach(function (ms) { window.setTimeout(onScroll, ms); });
+    onScroll();
+
+    /* ---------- 1. cursor spotlight ---------- */
+    var spot = document.getElementById("spot");
+    if (spot && !reduced && window.matchMedia("(hover: hover)").matches) {
+      var sx = 50, sy = 50, tx = 50, ty = 50, sraf = null;
+      window.addEventListener("pointermove", function (e) {
+        tx = (e.clientX / window.innerWidth) * 100;
+        ty = (e.clientY / window.innerHeight) * 100;
+        if (sraf) return;
+        sraf = window.requestAnimationFrame(function () {
+          sx += (tx - sx) * 0.16;
+          sy += (ty - sy) * 0.16;
+          spot.style.setProperty("--sx", sx.toFixed(2) + "%");
+          spot.style.setProperty("--sy", sy.toFixed(2) + "%");
+          sraf = null;
+        });
+      }, { passive: true });
+    }
+
+    /* ---------- 2. counters ---------- */
+    var counters = Array.prototype.slice.call(document.querySelectorAll(".count"));
+    function runCounter(el) {
+      if (el.dataset.done) return;
+      el.dataset.done = "1";
+      var to = parseInt(el.dataset.to, 10) || 0;
+      var pad = parseInt(el.dataset.pad, 10) || 0;
+      var suffix = el.dataset.suffix || "";
+      if (reduced) {
+        el.textContent = (pad ? String(to).padStart(pad, "0") : String(to)) + suffix;
+        el.classList.add("done");
+        return;
+      }
+      var start = performance.now();
+      var dur = 900;
+      function step(now) {
+        var p = Math.min(1, (now - start) / dur);
+        var eased = 1 - Math.pow(1 - p, 3);
+        var v = Math.round(to * eased);
+        el.textContent = (pad ? String(v).padStart(pad, "0") : String(v)) + suffix;
+        if (p < 1) window.requestAnimationFrame(step);
+        else el.classList.add("done");
+      }
+      window.requestAnimationFrame(step);
+    }
+    if ("IntersectionObserver" in window && !reduced) {
+      var cio = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { runCounter(e.target); cio.unobserve(e.target); }
+        });
+      }, { threshold: 0.6 });
+      counters.forEach(function (c) { cio.observe(c); });
+    } else {
+      counters.forEach(runCounter);
+    }
+
+    /* ---------- 3. bar hides on scroll down, returns on scroll up ---------- */
+    var bar = document.querySelector(".bar");
+    var lastY = 0;
+    window.addEventListener("scroll", function () {
+      var y = window.scrollY || 0;
+      if (!bar) return;
+      if (y > 160 && y > lastY + 4) bar.classList.add("tucked");
+      else if (y < lastY - 4 || y < 160) bar.classList.remove("tucked");
+      lastY = y;
+    }, { passive: true });
+
+    /* mobile sheet */
+    var sheet = document.getElementById("sheet");
+    var menuBtn = document.getElementById("menuBtn");
+    var closeBtn = document.getElementById("closeBtn");
+    var lastFocus = null;
+
+    function openSheet() {
+      lastFocus = document.activeElement;
+      sheet.classList.add("show");
+      menuBtn.setAttribute("aria-expanded", "true");
+      document.documentElement.style.overflow = "hidden";
+      if (closeBtn) closeBtn.focus();
+    }
+    function closeSheet() {
+      sheet.classList.remove("show");
+      menuBtn.setAttribute("aria-expanded", "false");
+      document.documentElement.style.overflow = "";
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    if (menuBtn) menuBtn.addEventListener("click", openSheet);
+    if (closeBtn) closeBtn.addEventListener("click", closeSheet);
+    if (sheet) {
+      Array.prototype.forEach.call(sheet.querySelectorAll("a"), function (a) {
+        a.addEventListener("click", closeSheet);
+      });
+    }
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && sheet && sheet.classList.contains("show")) closeSheet();
+    });
+
+    /* cases */
+    Array.prototype.forEach.call(document.querySelectorAll(".case"), function (item) {
+      var btn = item.querySelector(".case-btn");
+      var body = item.querySelector(".case-body");
+      if (!btn || !body) return;
+      btn.addEventListener("click", function () {
+        var open = btn.getAttribute("aria-expanded") === "true";
+        btn.setAttribute("aria-expanded", String(!open));
+        item.dataset.open = String(!open);
+        body.hidden = open;
+      });
+    });
+
+    /* TP-01 */
+    var tpForm = document.getElementById("tpForm");
+    var tpInput = document.getElementById("tpInput");
+    var tpOut = document.getElementById("tpOut");
+    var tpTries = document.getElementById("tpTries");
+    var tries = 0;
+
+    function foldOf(s) {
+      var h = 0x2f;
+      for (var i = 0; i < s.length; i++) h ^= s.charCodeAt(i);
+      return h & 0xffff;
+    }
+    function say(msg, cls) {
+      if (!tpOut) return;
+      tpOut.textContent = msg;
+      tpOut.className = "tp-out" + (cls ? " " + cls : "");
+    }
+    if (tpForm && tpInput) {
+      tpForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var v = tpInput.value;
+        tries++;
+        if (tpTries) tpTries.textContent = "attempt " + tries;
+        if (!v) { say("empty — needs 4 characters", "err"); return; }
+        if (v.length !== 4) { say("length " + v.length + " — requires exactly 4", "err"); return; }
+        if (foldOf(v) === 0) {
+          say("accepted · " + JSON.stringify(v) + " folds to 0x00", "ok");
+          var tpPanel = document.querySelector(".tp");
+          if (tpPanel) tpPanel.classList.add("solved");
+          tpInput.setAttribute("readonly", "readonly");
+          var b = tpForm.querySelector("button[type=submit]");
+          if (b) { b.textContent = "Passed"; b.disabled = true; }
+          var sol = document.querySelector(".tp-sol");
+          if (sol) sol.open = true;
+          return;
+        }
+        say("folds to 0x" + foldOf(v).toString(16).padStart(2, "0") + " — needs 0x00", "err");
+      });
+    }
+
+    /* copy email */
+    var copyBtn = document.getElementById("copyMail");
+    var copyNote = document.getElementById("copyNote");
+    if (copyBtn) {
+      copyBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        var mail = "kenzienabeel@gmail.com";
+        function done(ok) {
+          copyNote.textContent = ok ? "copied — " + mail : "copy failed — " + mail;
+          window.setTimeout(function () { copyNote.textContent = ""; }, 2600);
+        }
+        function legacy() {
+          try {
+            var ta = document.createElement("textarea");
+            ta.value = mail;
+            ta.setAttribute("readonly", "");
+            ta.style.cssText = "position:fixed;top:0;left:0;opacity:0";
+            document.body.appendChild(ta);
+            ta.select(); ta.setSelectionRange(0, mail.length);
+            var ok = document.execCommand("copy");
+            document.body.removeChild(ta);
+            done(ok);
+          } catch (err) { done(false); }
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(mail).then(function () { done(true); }, legacy);
+        } else legacy();
+      });
+    }
+  } catch (err) {
+    revealAll();
+    if (window.console && console.error) console.error("[g3ngi]", err);
+  }
+})();
+</script>
 </body>
 </html>
