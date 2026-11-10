@@ -79,25 +79,25 @@ const certifications = [
     name: "Certified AppSec Practitioner",
     issuer: "The SecOps Group",
     code: "APPSEC / 01",
-    url: "", // ← paste verification link here
+    url: "https://drive.google.com/file/d/1Q__fYiS5Y8N4TrzA_XQOWUAuT7umF3MH/view",
   },
   {
     name: "ROCm Star Application Developer",
     issuer: "AMD",
     code: "ROCM / 02",
-    url: "", // ← paste verification link here
+    url: "https://drive.google.com/file/d/1VdZEgX3xVjr5HZ7tYJH8qNtU5OU_TDb1/view?usp=sharing",
   },
   {
     name: "JavaScript Backend Scholarship",
     issuer: "DBS Foundation · 2023",
     code: "BACKEND / 03",
-    url: "", // ← paste certificate / announcement link here
+    url: "https://www.dicoding.com/certificates/L4PQGJ83QZO1", 
   },
   {
     name: "Deep Learning Workshop",
     issuer: "NVIDIA DLI",
     code: "DLI / 04",
-    url: "", // ← paste certificate link here
+    url: "https://learn.nvidia.com/certificates?id=2a333847a74140f2a27e610b382949cc", 
   },
 ];
 
