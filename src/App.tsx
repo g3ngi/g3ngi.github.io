@@ -66,26 +66,38 @@ const experiences = [
   },
 ];
 
+/**
+ * Certifications.
+ *
+ * `url` is optional — paste the public verification link (Credly badge,
+ * issuer page, PDF, whatever the credential gives you). When present the
+ * card becomes a real link and shows "OPEN CREDENTIAL". When it is missing
+ * or empty the card stays inert and says "SELECT TO VERIFY" as before.
+ */
 const certifications = [
   {
     name: "Certified AppSec Practitioner",
     issuer: "The SecOps Group",
     code: "APPSEC / 01",
+    url: "", // ← paste verification link here
   },
   {
     name: "ROCm Star Application Developer",
     issuer: "AMD",
     code: "ROCM / 02",
+    url: "", // ← paste verification link here
   },
   {
     name: "JavaScript Backend Scholarship",
     issuer: "DBS Foundation · 2023",
     code: "BACKEND / 03",
+    url: "", // ← paste certificate / announcement link here
   },
   {
     name: "Deep Learning Workshop",
     issuer: "NVIDIA DLI",
     code: "DLI / 04",
+    url: "", // ← paste certificate link here
   },
 ];
 
@@ -571,9 +583,22 @@ export default function App() {
               <span>{certification.code}</span>
               <h3>{certification.name}</h3>
               <p>{certification.issuer}</p>
-              <small>
-                {activeCertification === index ? "VERIFIED / ACTIVE" : "SELECT TO VERIFY"}
-              </small>
+
+              {certification.url ? (
+                <a
+                  className="cert-link"
+                  href={certification.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={(event) => event.stopPropagation()}
+                >
+                  Open credential <Arrow />
+                </a>
+              ) : (
+                <small>
+                  {activeCertification === index ? "VERIFIED / ACTIVE" : "SELECT TO VERIFY"}
+                </small>
+              )}
             </article>
           ))}
         </div>

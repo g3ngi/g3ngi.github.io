@@ -2622,3 +2622,53 @@ footer h2 em {
   white-space: nowrap;
   opacity: 0.85;
 }
+
+
+/* ==========================================================================
+   CERTIFICATION LINK
+   Shown only when a certification has a `url`. Sits where the
+   "SELECT TO VERIFY" small line used to be.
+   ========================================================================== */
+.cert-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: absolute;
+  right: 26px;
+  bottom: 22px;
+  color: inherit;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  transition: gap 0.25s ease, opacity 0.2s ease;
+}
+
+.cert-link svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+}
+
+.cert-link:hover {
+  gap: 13px;
+}
+
+/* on hover/active the card inverts to red-on-ink, so invert the link too */
+.certification-grid article:hover .cert-link,
+.certification-grid article.active .cert-link {
+  color: var(--ink);
+  border-color: var(--ink);
+}
+
+@media (max-width: 700px) {
+  .cert-link {
+    right: 20px;
+    bottom: 18px;
+    font-size: 10.5px;
+  }
+}
