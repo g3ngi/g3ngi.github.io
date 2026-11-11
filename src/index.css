@@ -2672,3 +2672,289 @@ footer h2 em {
     font-size: 10.5px;
   }
 }
+
+
+/* ==========================================================================
+   RESPONSIVE FIXES — phones and small tablets
+   Measured problems at 390px:
+     PROJECTS   heading 412px wide @ 78px  -> overflows the viewport
+     EDUCATIONS heading 508px wide @ 78px  -> overflows by 118px
+     50 text elements under 12px
+     12 tap targets under 40px tall
+     hero photo bleeds past the right edge
+   ========================================================================== */
+
+/* ---------- headings: 20vw is far too large below 600px ---------- */
+@media (max-width: 900px) {
+  .section-heading h2,
+  .record-header h2 {
+    font-size: clamp(2.2rem, 11vw, 4.5rem);
+    line-height: 0.82;
+    letter-spacing: -0.06em;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .about-intro {
+    font-size: clamp(2.2rem, 13vw, 4.5rem);
+    line-height: 0.82;
+    letter-spacing: -0.06em;
+    margin: 8vw 0 10vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-heading h2,
+  .record-header h2 {
+    font-size: clamp(1.9rem, 10.5vw, 3rem);
+  }
+  .about-intro {
+    font-size: clamp(1.9rem, 12vw, 3rem);
+  }
+}
+
+/* ---------- hero: keep the photo inside the screen ---------- */
+@media (max-width: 800px) {
+  .hero-image {
+    inset: 22% -6% -4% 0;   /* was -20% right -> bled past the edge */
+  }
+  .hero-title.full-name {
+    font-size: 16vw;
+    top: 27%;
+  }
+  .hero-title span:last-child {
+    margin-left: 0;
+  }
+  .hero-kicker {
+    font-size: 11px;
+    line-height: 1.45;
+    max-width: 62vw;
+  }
+  .vertical-type {
+    top: 30%;
+    right: 1.5vw;
+  }
+  .vertical-type b {
+    font-size: 13vw;
+  }
+  .vertical-type span {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+  }
+  .warning-card {
+    left: 5vw;
+    width: 88vw;
+    bottom: 10%;
+  }
+  .warning-card h1 {
+    font-size: clamp(1.3rem, 6.5vw, 2rem);
+  }
+  .warning-card > p:not(.micro-label) {
+    font-size: 12.5px;
+  }
+}
+
+/* ---------- readable minimum sizes ---------- */
+@media (max-width: 900px) {
+  /* body copy: nothing below 13px */
+  .experience-list p,
+  .project-detail p,
+  .project-description,
+  .education-grid article > p,
+  .repo-line p,
+  .tool-readout p,
+  .about-copy,
+  .award-row span {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  /* labels: nothing below 11.5px */
+  .micro-label,
+  .section-tag,
+  .experience-list article > span,
+  .project-id,
+  .project-meta,
+  .education-grid article > span,
+  .tool-tabs button,
+  .footer-top,
+  .footer-bottom,
+  .footer-actions,
+  .certification-grid h3 + p,
+  .award-row small,
+  .education-grid small {
+    font-size: 11.5px;
+  }
+
+  .section-rail span {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+}
+
+/* ---------- tap targets: minimum 44px high ---------- */
+@media (max-width: 900px) {
+  .site-header nav a,
+  .text-link,
+  .project-link,
+  .cert-link,
+  .repo-line a,
+  .footer-bottom a,
+  .socials a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .site-header nav a {
+    width: 100%;
+    padding: 14px 0;
+  }
+
+  .menu-toggle {
+    width: 44px;
+    height: 44px;
+    gap: 7px;
+  }
+
+  .project button {
+    padding: 22px 0;
+  }
+
+  .experience-list article,
+  .certification-grid article {
+    padding: 22px 20px;
+  }
+}
+
+/* ---------- section rails are noise on small screens ---------- */
+@media (max-width: 700px) {
+  .section-rail {
+    display: none;
+  }
+  .experience,
+  .education,
+  .toolbox,
+  .awards,
+  .certifications,
+  .work {
+    padding-left: 6vw;
+    padding-right: 6vw;
+  }
+}
+
+/* ---------- kit tabs wrap instead of squashing ---------- */
+@media (max-width: 700px) {
+  .tool-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+  }
+  .tool-tabs button {
+    padding: 14px 10px;
+    min-height: 48px;
+    white-space: normal;
+    text-align: left;
+  }
+}
+
+/* ---------- experience cards stack cleanly ---------- */
+@media (max-width: 700px) {
+  .experience-list {
+    padding-left: 26px;
+  }
+  .experience-list h2 {
+    margin-top: 26px;
+    font-size: clamp(1.5rem, 7vw, 2.2rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+  .experience-list h3 {
+    font-size: 12.5px;
+  }
+  .exp-node {
+    top: 26px;
+  }
+}
+
+/* ---------- project rows: stacked meta ---------- */
+@media (max-width: 700px) {
+  .project button {
+    display: block;
+  }
+  .project-title-row {
+    flex-wrap: wrap;
+    gap: 8px 12px;
+  }
+  .project-title {
+    font-size: clamp(1.6rem, 8vw, 2.4rem);
+  }
+  .project-meta {
+    display: block;
+    margin-top: 12px;
+  }
+  .project-arrow {
+    position: absolute;
+    right: 0;
+    top: 24px;
+  }
+}
+
+/* ---------- certifications single column ---------- */
+@media (max-width: 700px) {
+  .certification-grid {
+    grid-template-columns: 1fr;
+  }
+  .certification-grid article {
+    min-height: 200px;
+  }
+  .certification-grid h3 {
+    margin-top: 40px;
+    font-size: 1.25rem;
+  }
+}
+
+/* ---------- awards rows ---------- */
+@media (max-width: 700px) {
+  .award-row {
+    grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+    gap: 10px;
+    padding: 12px 0;
+  }
+  .award-row strong {
+    font-size: 1.1rem;
+  }
+}
+
+
+/* ---------- remaining small text: the last pass ---------- */
+@media (max-width: 900px) {
+  /* hero annotations — decorative but should still be legible */
+  .hero-kicker span,
+  .coordinate span,
+  .vertical-type span {
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+  }
+
+  /* project status tags */
+  .project-access,
+  .project-title-row .project-access {
+    font-size: 11.5px;
+    padding: 4px 9px;
+  }
+
+  /* kit readout + certification codes */
+  .tool-readout > div > span,
+  .tool-readout li span,
+  .certification-grid article > span,
+  .project-id,
+  .project-meta {
+    font-size: 11.5px;
+  }
+
+  /* section rail: hidden below 700 already, but bump for 700-900 */
+  .section-rail b {
+    font-size: 2rem;
+  }
+}
